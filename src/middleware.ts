@@ -13,8 +13,8 @@ function unauthorized(message = 'Authentication required') {
 }
 
 export const onRequest = defineMiddleware(({ request }, next) => {
-  const expectedUsername = process.env.AUTH_USERNAME || 'playplus';
-  const expectedPassword = process.env.AUTH_PASSWORD;
+  const expectedUsername = import.meta.env.AUTH_USERNAME || 'playplus';
+  const expectedPassword = import.meta.env.AUTH_PASSWORD;
 
   // Never accidentally publish the site if deployment configuration is incomplete.
   if (!expectedPassword) {
