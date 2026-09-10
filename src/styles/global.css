@@ -1,0 +1,177 @@
+@config "../../tailwind.config.mjs";
+@import "tailwindcss";
+
+:root {
+  --ink: #22282b;
+  --paper: #ececec;
+  --paper-bright: #fafafa;
+  --play: #f0154c;
+  --night: #0e0b1b;
+  --colossus: #1b142f;
+  --essential-blend-build: #2a426e;
+  --essential-space-explore: #4b2a62;
+  --essential-radical-transparency: #46954f;
+  --essential-freedom-within-form: #f6bb34;
+  --essential-flat-by-design: #faef95;
+  --essential-player-mindset: #e92758;
+  --essential-blend-build-text: var(--paper);
+  --essential-space-explore-text: var(--paper);
+  --essential-radical-transparency-text: var(--ink);
+  --essential-freedom-within-form-text: var(--ink);
+  --essential-flat-by-design-text: var(--ink);
+  --essential-player-mindset-text: var(--ink);
+  --max: 1280px;
+}
+
+/* Mr Banks and Avenir web licences are pending; add the licensed subset files before deploy. */
+@font-face { font-family: 'Mr Banks'; src: url('/fonts/MrBanks-Black.woff2') format('woff2'); font-weight: 900; font-display: swap; }
+@font-face { font-family: 'Avenir'; src: url('/fonts/Avenir-Medium.woff2') format('woff2'); font-weight: 500 900; font-display: swap; }
+@font-face { font-family: 'Bebas Neue'; src: url('/fonts/BebasNeue-Bold.woff2') format('woff2'); font-weight: 700; font-display: swap; }
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; overflow-x: hidden; background: var(--paper-bright); color: var(--ink); font-family: 'Avenir', 'Avenir Next', Arial, sans-serif; font-size: 1rem; line-height: 1.55; }
+a { color: inherit; text-underline-offset: .18em; }
+a:focus-visible, button:focus-visible, input:focus-visible { outline: 4px solid var(--essential-flat-by-design); outline-offset: 4px; }
+.skip-link { position: fixed; z-index: 100; left: 1rem; top: 1rem; padding: .75rem 1rem; background: var(--ink); color: white; transform: translateY(-200%); }
+.skip-link:focus { transform: translateY(0); }
+
+.site-header { min-height: 6.5rem; padding: 1.3rem clamp(1.25rem, 4vw, 3.5rem); display: flex; align-items: center; justify-content: space-between; gap: 2rem; background: var(--play); color: white; }
+.brand img { display: block; width: 7.5rem; height: auto; }
+.site-header nav { display: flex; align-items: center; gap: clamp(1rem, 2vw, 2rem); font-weight: 900; }
+.site-header nav > a:not(.nav-cta) { text-decoration: none; }
+.site-header nav > a:not(.nav-cta):hover { text-decoration: underline; }
+.nav-cta, .button { display: inline-flex; min-height: 3.4rem; align-items: center; justify-content: center; border: 0; border-radius: 3px; padding: .75rem 1.25rem; font: 900 1.05rem/1.1 'Avenir', sans-serif; text-decoration: none; cursor: pointer; }
+.nav-cta, .button-ink { background: var(--ink); color: white; }
+.button-light { background: var(--paper-bright); color: var(--night); }
+.button-outline { border: 2px solid #c87ce2; color: white; background: transparent; }
+.quiet-link { font-weight: 900; }
+.light-link { color: white; }
+
+.hero { overflow: hidden; min-height: 53rem; display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(22rem, .8fr); align-items: center; gap: 2rem; padding: clamp(4rem, 8vw, 8rem) max(1.5rem, calc((100vw - var(--max)) / 2)); background-color: var(--play); background-image: radial-gradient(circle at 20% 20%, rgba(255,255,255,.07) 0 1px, transparent 1px); background-size: 11px 11px; }
+.hero-copy { min-width: 0; max-width: 54rem; }
+.eyebrow, .label-heading, .card-eyebrow { font-family: 'Bebas Neue', 'Arial Narrow', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; }
+.hero .eyebrow { margin: 0 0 .5rem; font-size: 1.15rem; color: white; }
+.hero h1 { margin: 0; max-width: 52rem; color: var(--essential-flat-by-design); font: 900 clamp(4rem, 7.7vw, 8.6rem)/.86 'Mr Banks', Georgia, serif; text-transform: uppercase; letter-spacing: -.04em; }
+.hero h1 .hero-kicker { display: block; color: white; font-size: .52em; line-height: 1.03; text-transform: none; letter-spacing: -.03em; }
+.hero h1 .hero-punch { display: block; }
+.hero-lede { max-width: 46rem; font-size: clamp(1.15rem, 2vw, 1.7rem); color: var(--ink); }
+.book-actions { display: flex; align-items: center; gap: 1.25rem; margin-top: 2rem; }
+.retailers { margin-top: 2.5rem; font-weight: 900; }
+.retailers p { margin-bottom: .25rem; color: var(--essential-flat-by-design); }
+.retailers ul { display: flex; flex-wrap: wrap; gap: .45rem 1rem; margin: 0; padding: 0; list-style: none; color: white; }
+.book-placeholder { width: min(100%, 31rem); justify-self: center; transform: rotate(7deg); box-shadow: 2.5rem 4rem 5rem rgba(0,0,0,.35); }
+.asset-placeholder { display: grid; aspect-ratio: var(--placeholder-ratio); place-items: center; border: 3px dashed currentColor; background: linear-gradient(145deg, rgba(255,255,255,.55), rgba(255,255,255,.15)); color: var(--ink); }
+.asset-placeholder span { max-width: 12rem; padding: 1rem; font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: .08em; text-align: center; }
+
+.section-shell, .wide-shell { width: min(calc(100% - 3rem), var(--max)); margin-inline: auto; }
+.wide-shell { width: min(calc(100% - 3rem), 1540px); }
+.compact-shell { max-width: 62rem; }
+.section-light { background-color: var(--paper-bright); background-image: radial-gradient(circle, rgba(34,40,43,.11) 0 .75px, transparent .9px); background-size: 7px 7px; }
+.manifesto { padding: clamp(5rem, 10vw, 10rem) 0; }
+.manifesto-columns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(2rem, 5vw, 6rem); max-width: 58rem; margin: auto; font-size: 1.15rem; }
+.manifesto h2 { max-width: 70rem; margin: clamp(5rem, 10vw, 9rem) auto 0; text-align: center; font: 500 clamp(2.5rem, 5.3vw, 4.8rem)/1 'Mr Banks', Georgia, serif; }
+.manifesto h2 strong { display: block; margin-top: .15em; font-size: 1.65em; line-height: .84; text-transform: uppercase; }
+.label-heading { margin: 0 0 3rem; font-size: clamp(2rem, 3vw, 2.75rem); text-align: center; }
+.endorsements { padding: 5rem 0 8rem; }
+.endorsement-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; }
+blockquote { margin: 0; padding: 2rem; border-top: 5px solid var(--play); background: white; }
+blockquote > p { margin-top: 0; font-size: clamp(1.25rem, 2vw, 1.75rem); font-weight: 900; line-height: 1.3; }
+blockquote footer { display: grid; gap: .15rem; }
+blockquote footer span { color: #596064; }
+blockquote.pending { border-top-style: dashed; opacity: .68; }
+
+.section-dark { background-color: var(--night); color: white; background-image: linear-gradient(30deg, rgba(255,255,255,.025) 12%, transparent 12.5%, transparent 87%, rgba(255,255,255,.025) 87.5%), linear-gradient(150deg, rgba(255,255,255,.025) 12%, transparent 12.5%, transparent 87%, rgba(255,255,255,.025) 87.5%); background-size: 24px 42px; }
+.framework { padding: clamp(6rem, 10vw, 10rem) 0; text-align: center; }
+.framework-shell { display: grid; justify-items: center; gap: 3rem; }
+.stacked-title { margin: 0; text-align: center; font: 500 clamp(3.2rem, 6vw, 5.7rem)/.8 'Mr Banks', Georgia, serif; }
+.stacked-title span, .stacked-title strong { display: block; }
+.stacked-title strong { color: #4d93e7; font-size: 1.6em; text-transform: uppercase; }
+.essential-ring { position: relative; width: min(100%, 50rem); min-height: 31rem; }
+.essential { position: absolute; display: grid; justify-items: center; gap: .15rem; width: 10rem; color: white; text-decoration: none; transition: transform .22s linear, filter .22s linear; }
+.essential img { display: block; width: 6.75rem; height: 7.8rem; object-fit: contain; }
+.essential span { max-width: 10rem; font-weight: 900; }
+.essential small { color: #cbd0d7; font-family: 'Bebas Neue', sans-serif; letter-spacing: .08em; text-transform: uppercase; }
+.essential:hover, .essential:focus-visible { transform: translateY(-.4rem); filter: brightness(1.2); }
+.essential-1 { left: 8%; top: 8%; } .essential-2 { right: 8%; top: 8%; } .essential-3 { right: 0; top: 43%; }
+.essential-4 { right: 16%; bottom: 0; } .essential-5 { left: 16%; bottom: 0; } .essential-6 { left: 0; top: 43%; }
+.ring-plus { position: absolute; inset: 43% auto auto 50%; transform: translate(-50%, -50%); color: var(--essential-flat-by-design); font: 900 6rem/1 'Mr Banks', Georgia, serif; }
+.framework-copy { max-width: 65rem; margin: 0; font-size: clamp(1.25rem, 2.2vw, 2rem); }
+.framework .quiet-link { margin-top: -1.75rem; }
+
+.authors { padding: clamp(6rem, 10vw, 10rem) 0; }
+.author-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(2rem, 6vw, 7rem); max-width: 64rem; margin: auto; }
+.author-grid article h3 { margin: 1.5rem 0 .5rem; font: 900 clamp(2.3rem, 4vw, 3.5rem)/1 'Mr Banks', Georgia, serif; text-align: center; }
+.author-grid article > p { margin: 1rem auto 0; max-width: 34rem; font-size: 1.1rem; }
+
+.newsletter { padding: clamp(6rem, 10vw, 9rem) 0; background: var(--play); text-align: center; }
+.newsletter .stacked-title strong { color: var(--essential-flat-by-design); }
+.newsletter .section-shell > p { max-width: 52rem; margin: 2rem auto; font-size: clamp(1.2rem, 2.5vw, 1.8rem); }
+.newsletter form { display: grid; grid-template-columns: 1fr auto; gap: 1rem; max-width: 44rem; margin: 3rem auto 0; }
+.newsletter label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.newsletter input { min-height: 3.5rem; border: 0; border-bottom: 3px solid var(--ink); border-radius: 0; padding: .7rem 1rem; font: 500 1.1rem/1 'Avenir', sans-serif; }
+.newsletter .form-note { font-size: .95rem !important; }
+
+.your-move { padding: clamp(6rem, 10vw, 10rem) 0; text-align: center; }
+.your-move .stacked-title strong { color: #230030; }
+.section-intro { max-width: 60rem; margin: 2.5rem auto 4rem; font-size: clamp(1.25rem, 2.4vw, 1.9rem); }
+.card-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem; margin-bottom: 3rem; text-align: left; }
+.move-card { display: flex; min-height: 22rem; flex-direction: column; padding: clamp(2rem, 4vw, 3.5rem); }
+.move-card.blue { background: var(--essential-blend-build); color: var(--essential-blend-build-text); }
+.move-card.yellow { background: var(--essential-freedom-within-form); color: var(--essential-freedom-within-form-text); }
+.move-card h3 { margin: 0; font: 900 clamp(2.2rem, 4vw, 3.5rem)/.95 'Mr Banks', Georgia, serif; text-transform: uppercase; }
+.move-card .card-eyebrow { margin: 0 0 .75rem; }
+.move-card p:not(.card-eyebrow) { font-size: 1.1rem; }
+.move-card a { margin-top: auto; font-weight: 900; }
+
+.colossus { padding: clamp(6rem, 10vw, 10rem) 0; background: var(--colossus); color: white; text-align: center; }
+.colossus .stacked-title strong { color: #c87ce2; }
+.colossus p { max-width: 52rem; margin: 1.5rem auto; font-size: 1.15rem; }
+.colossus .colossus-lede { margin-top: 3rem; font-size: clamp(1.3rem, 2.5vw, 2rem); }
+.colossus .button { margin-top: 2rem; }
+.site-footer { display: flex; min-height: 12rem; align-items: flex-start; justify-content: space-between; gap: 2rem; padding: 3rem max(1.5rem, calc((100vw - var(--max)) / 2)); background: #0e0724; color: white; }
+.site-footer img { width: 5.3rem; height: auto; }
+.stub-page { min-height: calc(100vh - 6.5rem); padding: clamp(5rem, 10vw, 10rem) max(1.5rem, calc((100vw - 60rem) / 2)); background: var(--paper); }
+.stub-page h1 { margin: 0 0 1.5rem; font: 900 clamp(3.5rem, 8vw, 7rem)/.9 'Mr Banks', Georgia, serif; text-transform: uppercase; }
+.stub-page p:not(.eyebrow) { max-width: 44rem; font-size: 1.3rem; }
+.stub-page .button { margin-top: 2rem; }
+
+@media (max-width: 1023px) {
+  .hero { grid-template-columns: 1.2fr .8fr; min-height: 46rem; }
+  .hero h1 { font-size: clamp(3.8rem, 8vw, 6.4rem); }
+  .endorsement-grid { grid-template-columns: 1fr; }
+  .essential-ring { transform: scale(.92); margin: -1rem 0; }
+}
+
+@media (max-width: 767px) {
+  .site-header { align-items: stretch; flex-direction: column; gap: 1.25rem; }
+  .brand { align-self: flex-start; }
+  .site-header nav { display: grid; width: 100%; grid-template-columns: repeat(2, minmax(0, 1fr)); justify-items: start; gap: .75rem; font-size: .9rem; }
+  .nav-cta { min-height: 2.6rem; font-size: .9rem; }
+  .hero { min-height: 0; grid-template-columns: 1fr; padding-top: 4.5rem; padding-bottom: 5rem; }
+  .hero > * { width: 100%; max-width: 100%; }
+  .book-placeholder { grid-row: 1; width: min(58vw, 17rem); transform: rotate(3deg); margin-bottom: 3rem; }
+  .hero h1 { width: 100%; max-width: 100%; overflow-wrap: anywhere; font-size: clamp(3rem, 13vw, 5rem); }
+  .hero h1 .hero-kicker { font-size: .48em; }
+  .retailers ul { display: grid; }
+  .manifesto-columns, .author-grid, .card-grid { grid-template-columns: 1fr; }
+  .manifesto h2 strong { font-size: 1.35em; }
+  .essential-ring { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem 1rem; min-height: 0; transform: none; }
+  .essential { position: static; width: auto; }
+  .essential img { width: 5.5rem; height: 6.4rem; }
+  .ring-plus { display: none; }
+  .newsletter form { grid-template-columns: 1fr; }
+  .site-footer { align-items: flex-start; flex-direction: column; }
+}
+
+@media (max-width: 374px) {
+  .site-header { flex-direction: column; }
+  .site-header nav { width: 100%; justify-items: start; }
+  .book-actions { align-items: flex-start; flex-direction: column; }
+  .section-shell, .wide-shell { width: min(calc(100% - 2rem), var(--max)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}

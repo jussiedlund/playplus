@@ -1,0 +1,11 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+export function getStaticPaths() {
+  return [
+    { params: { slug: 'play-plus-at-a-glance' }, props: { title: 'Play+ at a glance' } },
+    { params: { slug: 'six-essentials-self-check' }, props: { title: 'Six essentials self-check' } },
+  ];
+}
+const { title } = Astro.props;
+---
+<BaseLayout title={`${title} — Play+`}><main id="main" class="stub-page"><p class="eyebrow">Resource preview</p><h1>{title}</h1><p>The final PDF and email delivery integration are pending client assets and a newsletter platform decision.</p><a class="button button-ink" href="/#main">Return home</a></main></BaseLayout>

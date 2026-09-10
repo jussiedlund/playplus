@@ -1,0 +1,19 @@
+---
+import '@/styles/global.css';
+interface Props { title?: string; description?: string }
+const { title = 'Play+ — The Future of Work Is Play', description = 'Play+ is a practical framework for making breakthrough work repeatable without making it routine.' } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#f0154c" />
+    <title>{title}</title>
+  </head>
+  <body class="antialiased">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <slot />
+  </body>
+</html>
