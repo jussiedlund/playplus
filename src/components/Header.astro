@@ -62,4 +62,8 @@
   document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') menuPairs.forEach(([toggle, menu]) => setOpen(toggle, menu, false));
   });
+
+  window.matchMedia('(max-width: 767px)').addEventListener('change', ({ matches }) => {
+    if (!matches) menuPairs.forEach(([toggle, menu]) => setOpen(toggle, menu, false));
+  });
 </script>

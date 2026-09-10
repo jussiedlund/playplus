@@ -55,7 +55,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-vis
 .menu-toggle[aria-expanded='true'] span:nth-child(2) { opacity: 0; }
 .menu-toggle[aria-expanded='true'] span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 .site-header:has(.menu-toggle[aria-expanded='true']) { z-index: 100; }
-.floating-nav { position: fixed; z-index: 45; top: 18px; left: 50%; display: flex; width: min(760px, calc(100vw - 40px)); min-height: 64px; align-items: center; gap: 22px; padding: 10px 12px 10px 20px; background: var(--ink); color: white; box-shadow: 0 14px 36px rgba(14,16,50,.22); opacity: 0; transform: translate3d(-50%, -16px, 0); visibility: hidden; transition: opacity var(--motion-base) var(--ease-out), transform var(--motion-base) var(--ease-out), visibility 0s linear var(--motion-base); }
+.floating-nav { position: fixed; z-index: 110; top: 18px; left: 50%; display: flex; width: min(760px, calc(100vw - 40px)); min-height: 64px; align-items: center; gap: 22px; padding: 10px 12px 10px 20px; background: var(--ink); color: white; box-shadow: 0 14px 36px rgba(14,16,50,.22); opacity: 0; transform: translate3d(-50%, -16px, 0); visibility: hidden; transition: opacity var(--motion-base) var(--ease-out), transform var(--motion-base) var(--ease-out), visibility 0s linear var(--motion-base); }
 .floating-nav[data-visible] { opacity: 1; transform: translate3d(-50%, 0, 0); visibility: visible; transition-delay: 0s; }
 .floating-brand { flex: 0 0 auto; }
 .floating-brand img { width: 86px; height: auto; }
@@ -66,7 +66,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-vis
 .button-light { background: white; color: var(--ink); }
 .button-outline { min-width: 245px; border: 2px solid var(--blue-accent); background: transparent; }
 
-.hero { position: relative; isolation: isolate; height: 1140px; background-color: var(--play); }
+.hero { position: relative; isolation: isolate; height: 1140px; perspective: 1200px; background-color: var(--play); }
 .hero-copy { position: relative; z-index: 2; width: 757px; margin-left: max(40px, calc((100vw - 1532px) / 2)); padding-top: 203px; }
 .hero h1 { margin: 0; color: white; font: 600 72px/.93 'Mr Banks', Georgia, serif; letter-spacing: -.02em; }
 .hero h1 span, .hero h1 strong { display: block; }
@@ -78,6 +78,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-vis
 .book-motion { --book-parallax-y: 0px; --book-tilt-x: 0deg; --book-tilt-y: 0deg; --book-shadow-opacity: .62; --book-parallax-max: 40px; --book-tilt-max: 2deg; position: absolute; z-index: 50; top: 150px; left: calc(50% + 120px); width: 900px; max-width: none; transform: translate3d(0, var(--book-parallax-y), 0) rotateX(var(--book-tilt-x)) rotateY(var(--book-tilt-y)); transform-style: preserve-3d; transition: transform var(--motion-book-return) var(--ease-out); will-change: transform; }
 .book-motion[data-pointer-active] { transition-duration: var(--motion-fast); }
 .book-cover { --book-rotation: -10.13deg; position: relative; width: 100%; max-width: none; transform-origin: center; filter: drop-shadow(56px 174px 256px rgb(0 0 0 / var(--book-shadow-opacity))); animation: book-float 5.5s ease-in-out infinite; will-change: transform, filter; }
+.book-motion[data-motion-paused] .book-cover { animation-play-state: paused; }
 @keyframes book-float {
   0%, 100% { transform: translate3d(0, 0, 0) rotate(var(--book-rotation)); }
   50% { transform: translate3d(7px, -18px, 0) rotate(calc(var(--book-rotation) + 1.2deg)); }

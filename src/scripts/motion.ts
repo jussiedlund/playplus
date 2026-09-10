@@ -6,14 +6,11 @@ export function initMotion() {
   const root = document.documentElement;
   const reduceMotion = window.matchMedia(reducedMotionQuery).matches;
 
-  if (reduceMotion) {
-    root.dataset.motion = 'reduced';
-    return;
-  }
-
-  root.dataset.motion = 'enabled';
-  initRevealUtility();
+  root.dataset.motion = reduceMotion ? 'reduced' : 'enabled';
   initFloatingNavigation();
+  if (reduceMotion) return;
+
+  initRevealUtility();
   initHeroMotion();
 }
 
@@ -43,6 +40,7 @@ function initFloatingNavigation() {
 
   const sectionLabel = navigation.querySelector<HTMLElement>('[data-current-section]');
   const sections = [...document.querySelectorAll<HTMLElement>('[data-section-label]')];
+  const hero = document.querySelector<HTMLElement>('.hero');
   let frame = 0;
   let previousScrollY = window.scrollY;
 
@@ -56,12 +54,14 @@ function initFloatingNavigation() {
     frame = 0;
     const scrollY = window.scrollY;
     const menuOpen = document.documentElement.dataset.menuOpen === 'primary';
+    const floatingMenuOpen = document.documentElement.dataset.menuOpen === 'floating';
     const scrollingDown = scrollY > previousScrollY + 2;
     const scrollingUp = scrollY < previousScrollY - 2;
     const trigger = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--floating-nav-trigger')) || 120;
-    const pastHero = scrollY > trigger;
+    const heroBoundary = hero ? hero.offsetTop + hero.offsetHeight : trigger;
+    const pastHero = scrollY > Math.max(trigger, heroBoundary);
 
-    setVisible(pastHero && !menuOpen && (!scrollingDown || scrollingUp));
+    setVisible(pastHero && !menuOpen && (floatingMenuOpen || !scrollingDown || scrollingUp));
     previousScrollY = scrollY;
 
     if (!sectionLabel) return;
@@ -94,16 +94,31 @@ function initHeroMotion() {
   let pointerX = 0;
   let pointerY = 0;
 
+  const syncBookAnimation = () => {
+    book.toggleAttribute('data-motion-paused', !heroInView || !pageVisible);
+  };
+
   const revealHeroCopy = () => {
     const storageKey = 'play-plus-hero-revealed';
-    if (window.sessionStorage.getItem(storageKey)) {
+    let alreadyRevealed = false;
+    try {
+      alreadyRevealed = window.sessionStorage.getItem(storageKey) === 'true';
+    } catch {
+      // Motion is an enhancement; private browsing must not prevent the page from working.
+    }
+
+    if (alreadyRevealed) {
       reveals.forEach((target) => target.setAttribute('data-hero-revealed', ''));
       return;
     }
 
     window.requestAnimationFrame(() => window.requestAnimationFrame(() => {
       reveals.forEach((target) => target.setAttribute('data-hero-revealed', ''));
-      window.sessionStorage.setItem(storageKey, 'true');
+      try {
+        window.sessionStorage.setItem(storageKey, 'true');
+      } catch {
+        // Keep the reveal as a one-time effect for this document if storage is unavailable.
+      }
     }));
   };
 
@@ -128,12 +143,14 @@ function initHeroMotion() {
   if ('IntersectionObserver' in window) {
     new IntersectionObserver(([entry]) => {
       heroInView = entry.isIntersecting;
+      syncBookAnimation();
       if (heroInView) requestBookUpdate();
     }, { threshold: 0 }).observe(hero);
   }
 
   document.addEventListener('visibilitychange', () => {
     pageVisible = !document.hidden;
+    syncBookAnimation();
     if (pageVisible) requestBookUpdate();
   });
   window.addEventListener('scroll', requestBookUpdate, { passive: true });
@@ -157,5 +174,6 @@ function initHeroMotion() {
   }
 
   revealHeroCopy();
+  syncBookAnimation();
   updateBook();
 }
