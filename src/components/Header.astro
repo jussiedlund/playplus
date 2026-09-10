@@ -1,9 +1,35 @@
 <header class="site-header">
   <a class="brand" href="/" aria-label="Play+ home"><img src="/assets/figma/play-wordmark.svg" width="121" height="42" alt="Play+" /></a>
-  <nav aria-label="Primary navigation">
-    <a href="/framework">Framework</a>
-    <a href="/speaking">Speaking</a>
-    <a href="/notes">Notes</a>
+  <div class="header-actions">
+    <nav id="primary-menu" aria-label="Primary navigation" data-primary-menu>
+      <a href="/framework">Framework</a>
+      <a href="/speaking">Speaking</a>
+      <a href="/notes">Notes</a>
+    </nav>
     <a class="nav-cta" href="#book">Get the book</a>
-  </nav>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-menu" aria-label="Open menu" data-menu-toggle>
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </header>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+  const menu = document.querySelector<HTMLElement>('[data-primary-menu]');
+
+  if (toggle && menu) {
+    const setOpen = (open: boolean) => {
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      menu.toggleAttribute('data-open', open);
+    };
+
+    toggle.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
+    menu.addEventListener('click', (event) => {
+      if ((event.target as HTMLElement).closest('a')) setOpen(false);
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') setOpen(false);
+    });
+  }
+</script>

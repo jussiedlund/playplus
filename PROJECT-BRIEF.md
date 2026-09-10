@@ -28,6 +28,11 @@ Build the Play+ homepage as a close, responsive translation of the approved desk
 | D009 | 2026-09-10 | Extend the pink hero so the full retailer list remains visible. |
 | D010 | 2026-09-10 | Turn endorsements into an accessible autoplay carousel with manual arrows/dots, pause-on-interaction and reduced-motion support. Use playful Moomintroll and Arja Saijonmaa placeholder endorsements for private review. |
 | D011 | 2026-09-10 | Newsletter input is explicitly white; Your Move card content is centred. |
+| D012 | 2026-09-10 | Let the book cross above the header background and add a restrained floating/rotating loop; keep navigation controls above it and disable the effect for reduced-motion users. |
+| D013 | 2026-09-10 | At `767px` and below, retain “Get the book” and collapse Framework/Speaking/Notes into an accessible burger menu. |
+| D014 | 2026-09-10 | Set retailer links in Montserrat. Split the manifesto callout into a 72px medium lead and a black, uppercase 144px conclusion. |
+| D015 | 2026-09-10 | Keep every endorsement card the same fixed height, size copy to fit the longest placeholder, and use only the bottom indicators for manual carousel navigation. |
+| D016 | 2026-09-10 | Apply the supplied `Hex Grid.png` over pink and light sections, `hex-pattern-1.png` over dark sections, and a subtle fixed CSS noise overlay across the complete site. |
 
 ## Homepage structure
 
@@ -46,7 +51,6 @@ Header → book hero → proposition → endorsements → Play+ model → author
 ## Backlog
 
 - Move editable page copy into Markdown content files so non-code updates are straightforward. The current data is split between `src/data/home.ts` and `src/pages/index.astro`; this has not yet been implemented.
-- Add the planned subtle floating animation to the book after layout approval.
 - Replace playful endorsement placeholders with approved content before publishing.
 
 ## Verification record
