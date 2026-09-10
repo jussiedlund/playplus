@@ -1,7 +1,7 @@
 # Play+ homepage — living implementation brief
 
 **Last updated:** 10 September 2026  
-**Status:** First fidelity pass implemented; endorsement carousel motion added. Book motion remains deferred.
+**Status:** First fidelity pass implemented. Motion and interaction direction is proposed in [`MOTION-BRIEF.md`](MOTION-BRIEF.md), pending approval before the broader animation pass.
 
 ## Current objective
 
@@ -34,6 +34,7 @@ Build the Play+ homepage as a close, responsive translation of the approved desk
 | D015 | 2026-09-10 | Keep every endorsement card the same fixed height, size copy to fit the longest placeholder, and use only the bottom indicators for manual carousel navigation. |
 | D016 | 2026-09-10 | Apply `Hex Grid.png` over pink/light sections and `hex-pattern-1-black.png` over dark sections as half-scale repeating tiles. Because both PNGs average only about 5% embedded alpha, use a 25% layer opacity (about 1.25% average effective coverage, 22–25% at the visible lines). Apply a fixed CSS noise overlay across the complete site at 22% after two review increases. |
 | D017 | 2026-09-10 | At mobile widths, enlarge the book to 170% of its previous rendered size; make endorsement cards more portrait-oriented with adjacent-slide peeks; enlarge model illustrations and labels by about 50%; reduce the Colossus mark by 30%. |
+| D018 | 2026-09-10 | Draft a separate implementation-ready motion brief. Prefer restrained editorial motion and platform APIs; require reduced-motion fallbacks, progressive enhancement and no scroll-jacking. |
 
 ## Homepage structure
 
@@ -52,6 +53,7 @@ Header → book hero → proposition → endorsements → Play+ model → author
 ## Backlog
 
 - Move editable page copy into Markdown content files so non-code updates are straightforward. The current data is split between `src/data/home.ts` and `src/pages/index.astro`; this has not yet been implemented.
+- Review and approve `MOTION-BRIEF.md`, then hand its recommended first pass to an implementation agent.
 - Replace playful endorsement placeholders with approved content before publishing.
 
 ## Verification record
