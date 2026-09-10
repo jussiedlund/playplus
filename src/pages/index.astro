@@ -2,7 +2,8 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Header from '@/components/Header.astro';
 import FrameworkTeaser from '@/components/FrameworkTeaser.astro';
-import { authors, endorsements, moveCards, retailers } from '@/data/home';
+import EndorsementCarousel from '@/components/EndorsementCarousel.astro';
+import { authors, moveCards, retailers } from '@/data/home';
 ---
 <BaseLayout>
   <Header />
@@ -29,21 +30,7 @@ import { authors, endorsements, moveCards, retailers } from '@/data/home';
       </div>
     </section>
 
-    <section class="endorsements section-light" aria-labelledby="endorsements-heading">
-      <h2 class="label-heading" id="endorsements-heading">what others have to say about the book</h2>
-      <div class="endorsement-track" tabindex="0" aria-label="Book endorsements">
-        {endorsements.map((endorsement) => (
-          <blockquote class="endorsement-card">
-            <img src={endorsement.image} width="484" height="600" alt={endorsement.imageAlt} />
-            <div>
-              <p>“{endorsement.quote}”</p>
-              <footer><strong>— {endorsement.name}</strong><span>{endorsement.role}</span></footer>
-            </div>
-          </blockquote>
-        ))}
-      </div>
-      <div class="carousel-dots" aria-hidden="true"><span></span><span></span></div>
-    </section>
+    <EndorsementCarousel />
 
     <FrameworkTeaser />
 

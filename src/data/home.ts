@@ -11,8 +11,8 @@ export const retailers: Retailer[] = [
   { name: 'Apple Books', url: 'https://books.apple.com/' },
 ];
 
-// These entries intentionally reproduce the current Figma frame verbatim, including
-// its duplicate Ed Catmull card and “Mumintrollet” placeholder attribution.
+// Moomintroll and Arja copy is deliberately playful placeholder content for this
+// private review pass. Replace it with approved endorsements before publishing.
 export const endorsements: Endorsement[] = [
   {
     quote: 'Most books about innovation focus on what to build. This one focuses on the conditions that make building possible — and gets it exactly right. I wish I’d had this book twenty years ago.',
@@ -22,18 +22,18 @@ export const endorsements: Endorsement[] = [
     imageAlt: 'Ed Catmull',
   },
   {
-    quote: 'Most books about innovation focus on what to build. This one focuses on the conditions that make building possible — and gets it exactly right. I wish I’d had this book twenty years ago.',
-    name: 'Ed Catmull',
-    role: 'co-founder of Pixar and author of Creativity, Inc.',
-    image: '/assets/content/ed-catmull.webp',
-    imageAlt: 'Ed Catmull',
+    quote: 'The best work happens when there is room to wander, wonder, and occasionally disappear into the woods. Play+ understands that beautifully.',
+    name: 'Moomintroll',
+    role: 'philosopher, adventurer and Finnish icon',
+    image: '/assets/content/moomin.webp',
+    imageAlt: 'Moomintroll',
   },
   {
-    quote: 'Most books about innovation focus on what to build. This one focuses on the conditions that make building possible — and gets it exactly right. I wish I’d had this book twenty years ago.',
-    name: 'Mumintrollet',
-    role: 'co-founder of Pixar and author of Creativity, Inc.',
-    image: '/assets/content/moomin.webp',
-    imageAlt: 'Moomintrollet',
+    quote: 'In Finland, we know that courage is quiet, collaboration is practical, and the best ideas often arrive after the sauna. Play+ makes all three feel possible at work.',
+    name: 'Arja Saijonmaa',
+    role: 'singer, activist and honorary Play+ provocateur',
+    image: '/assets/content/arja.jpg',
+    imageAlt: 'Arja Saijonmaa',
   },
 ];
 

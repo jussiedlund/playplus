@@ -6,10 +6,10 @@ Repeatable homepage content lives in `src/data/home.ts`: retailers, the three Fi
 
 Supplied web artwork lives in `public/assets/content/`; its source material is preserved in `additional-content-for-codex/`.
 
-Known pending content and integrations:
+Backlog and pending integrations:
 
-- distributable Avenir/Avenir Next body webfont and final type licensing confirmation;
+- migrate editable page copy from TypeScript/Astro into Markdown content files;
 - exact retailer product URLs;
-- replacement endorsement content if the duplicated Ed Catmull / “Mumintrollet” Figma placeholders are revised;
+- replacement approved endorsement content for the playful Moomintroll and Arja Saijonmaa review placeholders;
 - resource PDFs, newsletter provider integration and workshop enquiry routing;
 - confirmation of the final Colossus destination URL.

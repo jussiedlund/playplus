@@ -1,5 +1,9 @@
 @config "../../tailwind.config.mjs";
 @import "tailwindcss";
+@import "@fontsource/montserrat/400.css";
+@import "@fontsource/montserrat/600.css";
+@import "@fontsource/montserrat/700.css";
+@import "@fontsource/bebas-neue/400.css";
 
 :root {
   --ink: #0e1032;
@@ -19,7 +23,7 @@
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body { margin: 0; overflow-x: hidden; background: var(--paper); color: var(--ink); font-family: 'Avenir Next', Avenir, Arial, sans-serif; font-size: 16px; line-height: 1.45; }
+body { margin: 0; overflow-x: hidden; background: var(--paper); color: var(--ink); font-family: 'Montserrat', Arial, sans-serif; font-size: 16px; line-height: 1.45; }
 img { display: block; max-width: 100%; }
 a { color: inherit; text-underline-offset: .18em; }
 a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-visible { outline: 4px solid var(--yellow); outline-offset: 4px; }
@@ -28,24 +32,24 @@ a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-vis
 
 .site-header { position: relative; z-index: 5; height: 122px; padding: 0 40px; display: flex; align-items: center; justify-content: space-between; background: var(--play); color: white; }
 .brand img { width: 115px; height: auto; }
-.site-header nav { display: flex; align-items: center; gap: 30px; font-size: 24px; font-weight: 700; }
+.site-header nav { display: flex; align-items: center; gap: 30px; font: 400 26px/1 'Bebas Neue', sans-serif; letter-spacing: .02em; }
 .site-header nav > a { text-decoration: none; }
 .site-header nav > a:hover { text-decoration: underline; }
-.nav-cta, .button { display: inline-flex; min-height: 55px; align-items: center; justify-content: center; border: 0; border-radius: 0; padding: 13px 24px; background: var(--ink); color: white; font: 700 20px/1.1 'Avenir Next', Avenir, Arial, sans-serif; text-decoration: none; cursor: pointer; }
+.nav-cta, .button { display: inline-flex; min-height: 55px; align-items: center; justify-content: center; border: 0; border-radius: 0; padding: 13px 24px; background: var(--ink); color: white; font: 400 24px/1 'Bebas Neue', sans-serif; letter-spacing: .02em; text-decoration: none; cursor: pointer; }
 .nav-cta { background: white; color: var(--ink); }
 .button-light { background: white; color: var(--ink); }
 .button-outline { min-width: 245px; border: 2px solid var(--blue-accent); background: transparent; }
 
-.hero { position: relative; height: 1012px; overflow: hidden; background: var(--play); }
+.hero { position: relative; height: 1140px; overflow: hidden; background: var(--play); }
 .hero-copy { position: relative; z-index: 2; width: 757px; margin-left: max(40px, calc((100vw - 1532px) / 2)); padding-top: 203px; }
 .hero h1 { margin: 0; color: white; font: 600 72px/.93 'Mr Banks', Georgia, serif; letter-spacing: -.02em; }
 .hero h1 span, .hero h1 strong { display: block; }
 .hero h1 strong { margin-top: 10px; color: var(--yellow); font-size: 142px; font-weight: 900; line-height: .79; text-transform: uppercase; }
 .hero-copy > p { width: 690px; margin: 62px 0 0; font-size: 32px; line-height: 1.22; }
-.retailers { margin-top: 52px; color: white; font-size: 22px; font-weight: 700; }
+.retailers { margin-top: 52px; color: white; font: 400 24px/1.25 'Bebas Neue', sans-serif; letter-spacing: .02em; }
 .retailers > p { margin: 0 0 8px; color: var(--yellow); }
 .retailers ul { display: flex; flex-wrap: wrap; gap: 7px 18px; margin: 0; padding: 0; list-style: none; }
-.book-cover { position: absolute; z-index: 1; top: -35px; left: calc(50% + 120px); width: 900px; max-width: none; transform: rotate(-10.13deg); transform-origin: center; filter: drop-shadow(24px 38px 35px rgba(0,0,0,.28)); }
+.book-cover { position: absolute; z-index: 1; top: -35px; left: calc(50% + 120px); width: 900px; max-width: none; transform: rotate(-10.13deg); transform-origin: center; filter: drop-shadow(56px 174px 256px rgba(0,0,0,.62)); }
 
 .section-light { background-color: var(--paper); background-image: radial-gradient(circle, rgba(14,16,50,.12) 0 .75px, transparent .85px); background-size: 7px 7px; }
 .manifesto { min-height: 1193px; padding: 150px 24px 105px; }
@@ -56,18 +60,23 @@ a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-vis
 .manifesto h2 span { display: block; }
 .manifesto h2::first-line { font-size: 72px; }
 
-.label-heading { margin: 0; text-align: center; font: 600 42px/1 'Mr Banks', Georgia, serif; text-transform: none; }
+.label-heading { margin: 0; text-align: center; font: 400 48px/1 'Bebas Neue', sans-serif; letter-spacing: .015em; }
 .endorsements { min-height: 595px; overflow: hidden; padding: 28px 0 65px; }
-.endorsement-track { --quote-card: min(1032px, 76vw); display: flex; gap: 20px; width: max-content; margin-top: 54px; transform: translateX(calc((100vw - var(--quote-card)) / 2 - var(--quote-card) - 20px)); overflow: visible; }
-.endorsement-card { flex: 0 0 var(--quote-card); height: 300px; display: grid; grid-template-columns: 242px 1fr; margin: 0; overflow: hidden; background: white; }
+.carousel-shell { position: relative; width: min(1032px, 76vw); margin: 54px auto 0; }
+.carousel-viewport { overflow: hidden; }
+.endorsement-track { display: flex; width: 100%; transition: transform 700ms cubic-bezier(.22,.61,.36,1); }
+.endorsement-card { flex: 0 0 100%; height: 300px; display: grid; grid-template-columns: 242px 1fr; margin: 0; overflow: hidden; background: white; }
 .endorsement-card > img { width: 242px; height: 300px; object-fit: cover; }
 .endorsement-card > div { display: flex; min-width: 0; flex-direction: column; padding: 31px 38px 25px; }
 .endorsement-card > div > p { margin: 0; font-size: 30px; font-weight: 600; line-height: 1.2; }
 .endorsement-card footer { display: grid; margin-top: auto; font-size: 20px; line-height: 1.15; }
 .endorsement-card footer strong { font-size: 24px; }
+.carousel-arrow { position: absolute; top: 50%; width: 48px; height: 48px; border: 0; border-radius: 50%; background: var(--ink); color: white; font: 600 24px/1 Montserrat, sans-serif; cursor: pointer; transform: translateY(-50%); }
+.carousel-previous { left: -72px; }
+.carousel-next { right: -72px; }
 .carousel-dots { display: flex; justify-content: center; gap: 8px; margin-top: 26px; }
-.carousel-dots span { width: 13px; height: 13px; border-radius: 50%; background: var(--ink); }
-.carousel-dots span + span { opacity: .25; }
+.carousel-dots button { width: 13px; height: 13px; border: 0; border-radius: 50%; padding: 0; background: var(--ink); opacity: .25; cursor: pointer; }
+.carousel-dots button[aria-current='true'] { opacity: 1; }
 
 .section-dark { background-color: var(--night); color: white; background-image: radial-gradient(circle, rgba(255,255,255,.035) 0 .65px, transparent .8px); background-size: 8px 8px; }
 .framework { min-height: 1217px; padding: 112px 24px 100px; text-align: center; }
@@ -79,7 +88,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-vis
 .model-parts { display: grid; width: 732px; max-width: 100%; grid-template-columns: repeat(3, 200px); justify-content: space-between; margin: 118px auto 0; }
 .model-part { display: grid; height: 220px; place-items: end center; }
 .model-part img { max-height: 169px; width: auto; }
-.model-part strong { align-self: end; font-size: 24px; }
+.model-part strong { align-self: end; font: 400 25px/1 'Bebas Neue', sans-serif; letter-spacing: .02em; }
 .framework-copy { margin: 98px auto 52px; font-size: 32px; line-height: 1.25; }
 
 .authors { min-height: 1231px; padding: 121px 24px 115px; }
@@ -96,7 +105,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-vis
 .newsletter-inner > p { margin: 53px auto 58px; font-size: 32px; line-height: 1.25; }
 .newsletter form { display: grid; width: 905px; max-width: 100%; grid-template-columns: 555px 330px; gap: 20px; margin: auto; }
 .newsletter label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
-.newsletter input { height: 58px; border: 0; padding: 10px 18px; color: var(--ink); font: 400 20px/1 'Avenir Next', Avenir, sans-serif; }
+.newsletter input { height: 58px; border: 0; padding: 10px 18px; background: white; color: var(--ink); font: 400 20px/1 Montserrat, sans-serif; }
 .newsletter button { height: 58px; }
 
 .your-move { min-height: 1769px; padding: 101px 24px 122px; text-align: center; }
@@ -104,9 +113,9 @@ a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-vis
 .your-move .stacked-title strong { color: #2b143b; }
 .section-intro { margin: 57px auto 102px; font-size: 32px; line-height: 1.24; }
 .move-group { margin-top: 52px; }
-.move-group > h3 { margin: 0 0 24px; font: 600 42px/1 'Mr Banks', Georgia, serif; }
+.move-group > h3 { margin: 0 0 24px; font: 400 48px/1 'Bebas Neue', sans-serif; letter-spacing: .015em; }
 .card-grid { display: grid; grid-template-columns: repeat(2, 504px); gap: 20px; text-align: left; }
-.move-card { display: flex; height: 372px; flex-direction: column; padding: 39px 42px 35px; }
+.move-card { display: flex; height: 372px; flex-direction: column; align-items: center; justify-content: flex-start; padding: 39px 42px 35px; text-align: center; }
 .move-card.blue { background: var(--blue); color: white; }
 .move-card.yellow { background: var(--yellow); color: var(--ink); }
 .move-card h4 { margin: 0; font: 600 40px/.92 'Mr Banks', Georgia, serif; }
@@ -114,7 +123,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-vis
 .move-card h4 strong { color: var(--blue-accent); font-size: 54px; font-weight: 900; text-transform: uppercase; }
 .move-card.yellow h4 strong { color: var(--green); }
 .move-card > p { margin: 25px 0 0; font-size: 18px; line-height: 1.36; }
-.move-card > a { margin-top: auto; font-size: 18px; font-weight: 700; }
+.move-card > a { margin-top: auto; font: 400 22px/1 'Bebas Neue', sans-serif; }
 .workshop-button { margin-top: 47px; }
 
 .colossus { min-height: 1223px; padding: 118px 24px 100px; background: var(--colossus); color: white; text-align: center; }
@@ -161,8 +170,11 @@ a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-vis
   .manifesto h2 { margin-top: 75px; font-size: 46px; line-height: .95; }
   .endorsements { padding: 55px 0; }
   .label-heading { padding: 0 20px; font-size: 34px; }
-  .endorsement-track { width: auto; margin-top: 38px; padding: 0 20px 8px; transform: none; overflow-x: auto; scroll-snap-type: x mandatory; }
-  .endorsement-card { flex-basis: calc(100vw - 50px); height: auto; min-height: 510px; grid-template-columns: 1fr; scroll-snap-align: center; }
+  .carousel-shell { width: calc(100vw - 40px); margin-top: 38px; }
+  .carousel-arrow { top: 212px; width: 42px; height: 42px; }
+  .carousel-previous { left: 10px; }
+  .carousel-next { right: 10px; }
+  .endorsement-card { height: auto; min-height: 510px; grid-template-columns: 1fr; }
   .endorsement-card > img { width: 100%; height: 230px; }
   .endorsement-card > div { padding: 25px; }
   .endorsement-card > div > p { font-size: 23px; }

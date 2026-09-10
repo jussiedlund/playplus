@@ -1,7 +1,7 @@
 # Play+ homepage — living implementation brief
 
 **Last updated:** 10 September 2026  
-**Status:** First fidelity pass implemented; animation intentionally deferred.
+**Status:** First fidelity pass implemented; endorsement carousel motion added. Book motion remains deferred.
 
 ## Current objective
 
@@ -18,11 +18,16 @@ Build the Play+ homepage as a close, responsive translation of the approved desk
 | ID | Date | Decision |
 |---|---|---|
 | D001 | 2026-09-10 | Rebuild the homepage from Figma node `149:539`; do not rewrite or editorialise its visible content. |
-| D002 | 2026-09-10 | Prioritise static visual and responsive fidelity. Animation is a separate next phase. |
+| D002 | 2026-09-10 | Prioritise static visual and responsive fidelity. Book animation remains a separate next phase; the endorsement carousel is the first approved motion exception. |
 | D003 | 2026-09-10 | Use the supplied book cover, Olof and Mark portraits, endorsement portraits, composite model graphics and Colossus mark. |
 | D004 | 2026-09-10 | Preserve the current Figma endorsement carousel verbatim, including its duplicated Ed Catmull card and “Mumintrollet” placeholder attribution, until the design/content source changes. |
 | D005 | 2026-09-10 | Maintain this folder as a Git repository on `main`; commit coherent implementation milestones. |
 | D006 | 2026-09-10 | Treat the 1728 px Figma frame as the desktop reference. Reflow below desktop while keeping the same content order and visual language. |
+| D007 | 2026-09-10 | Replace Avenir with self-hosted Montserrat from the Google Fonts catalogue; use Bebas Neue for navigation, buttons and label-style headings. |
+| D008 | 2026-09-10 | Render the book shadow in CSS using x `56`, y `174`, blur `256`; animate the book only after the remaining page is settled. |
+| D009 | 2026-09-10 | Extend the pink hero so the full retailer list remains visible. |
+| D010 | 2026-09-10 | Turn endorsements into an accessible autoplay carousel with manual arrows/dots, pause-on-interaction and reduced-motion support. Use playful Moomintroll and Arja Saijonmaa placeholder endorsements for private review. |
+| D011 | 2026-09-10 | Newsletter input is explicitly white; Your Move card content is centred. |
 
 ## Homepage structure
 
@@ -33,9 +38,16 @@ Header → book hero → proposition → endorsements → Play+ model → author
 - Astro renders a static site; homepage content data lives in `src/data/home.ts`.
 - Layout and responsive behaviour live in `src/styles/global.css`.
 - Supplied source artwork remains untouched in `additional-content-for-codex/`; web-ready derivatives live in `public/assets/content/`.
-- Mr Banks is locally supplied and used for display typography. Body copy currently falls back through locally installed Avenir/Avenir Next and Arial; confirm a distributable webfont before production.
+- Mr Banks is locally supplied and used for primary display typography. Montserrat and Bebas Neue are bundled from `@fontsource`, avoiding runtime font requests.
 - Retail links remain category-level placeholders until product URLs are supplied.
 - Newsletter submission, enquiry routing and resource PDFs are not yet connected.
+- The current `additional-content-for-codex/Book Cover-ish.png` still contains a baked-in shadow/background. Re-add the intended shadowless replacement, then regenerate `public/assets/content/book-cover.webp`; the requested CSS shadow is already configured.
+
+## Backlog
+
+- Move editable page copy into Markdown content files so non-code updates are straightforward. The current data is split between `src/data/home.ts` and `src/pages/index.astro`; this has not yet been implemented.
+- Add the planned subtle floating animation to the book after layout approval.
+- Replace playful endorsement placeholders with approved content before publishing.
 
 ## Verification record
 
