@@ -1,21 +1,21 @@
----
-import { essentials } from '@/data/home';
----
 <section class="framework section-dark" id="framework" aria-labelledby="framework-heading">
-  <div class="section-shell framework-shell">
-    <h2 class="stacked-title" id="framework-heading"><span>The</span><strong>Play+</strong><span>Model</span></h2>
-    <div class="essential-ring" aria-label="The six Play+ essentials">
-      {essentials.map((essential, index) => (
-        <a class={`essential essential-${index + 1}`} href={`/framework#${essential.slug}`} aria-label={`${essential.name}, ${essential.layer}`}>
-          <img src={essential.asset} width="211" height="243" alt="" />
-          <span>{essential.name}</span>
-          <small>{essential.layer}</small>
-        </a>
-      ))}
-      <div class="ring-plus" aria-hidden="true">+</div>
+  <div class="framework-inner">
+    <h2 class="stacked-title model-title" id="framework-heading"><span>The</span><strong>Play+</strong><span>Model</span></h2>
+    <div class="model-parts" aria-label="The three parts of the Play+ model">
+      <div class="model-part">
+        <img src="/assets/content/six-essentials.svg" width="157" height="148" alt="" />
+        <strong>Essentials</strong>
+      </div>
+      <div class="model-part">
+        <img src="/assets/content/plus-elements.svg" width="115" height="115" alt="" />
+        <strong>Plus Elements</strong>
+      </div>
+      <div class="model-part">
+        <img src="/assets/content/four-structures.svg" width="138" height="169" alt="" />
+        <strong>Structures</strong>
+      </div>
     </div>
     <p class="framework-copy">Six essential conditions create the playground. Ten configurable plus elements shape each game. Four organisational structures determine where play lives. Together, they form Play+ — a system for making breakthrough repeatable without making it routine.</p>
-    <a class="button button-light" href="/resources/play-plus-at-a-glance">Download Play+ at a glance</a>
-    <a class="quiet-link light-link" href="/framework">Explore the framework <span aria-hidden="true">→</span></a>
+    <a class="button button-light" href="/resources/play-plus-at-a-glance">Download the Play+ one-pager</a>
   </div>
 </section>

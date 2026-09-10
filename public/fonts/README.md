@@ -1,9 +1,9 @@
-# Font assets pending
+# Font assets
 
-Add the licensed, web-subset files using these exact names before deployment:
+The supplied Mr Banks desktop font files are included for local design fidelity:
 
-- `MrBanks-Black.woff2`
-- `Avenir-Medium.woff2`
-- `BebasNeue-Bold.woff2`
+- `MrBanks-Regular.otf`
+- `MrBanks-Medium.otf`
+- `MrBanks-Black.otf`
 
-The CSS intentionally includes system fallbacks so local development remains usable while licensing is resolved.
+Before public deployment, confirm that the licence permits web embedding and replace them with optimised WOFF2 subsets if appropriate. A distributable Avenir/Avenir Next body webfont has not been supplied; the CSS currently uses the locally available face with Arial as a fallback. The current Figma frame does not require a separate Bebas Neue file for this homepage pass.

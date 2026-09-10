@@ -1,15 +1,15 @@
 # Content guide
 
-Homepage repeatable content lives in `src/data/home.ts`: retailers, endorsements, authors, the six essentials, and Your Move cards.
+The current homepage’s content and ordering are taken verbatim from Figma frame `149:539`. See `PROJECT-BRIEF.md` for the source hierarchy and decision log.
 
-Page-level editorial copy and section order live in `src/pages/index.astro`. Design tokens and responsive rules live in `src/styles/global.css`; Tailwind maps those variables in `tailwind.config.mjs`.
+Repeatable homepage content lives in `src/data/home.ts`: retailers, the three Figma endorsement cards, authors and Your Move cards. Page-level copy and section order live in `src/pages/index.astro`. Design tokens and responsive rules live in `src/styles/global.css`.
 
-Known pending content:
+Supplied web artwork lives in `public/assets/content/`; its source material is preserved in `additional-content-for-codex/`.
 
-- licensed Mr Banks, Avenir, and Bebas Neue webfont files;
-- hero-grade book cover artwork;
-- two approved author portraits;
-- Amy Edmondson and Adam Grant endorsement copy/sign-off;
-- exact retailer product URLs and publication state;
-- resource PDFs and newsletter provider integration;
-- final Colossus destination URL and visibility date.
+Known pending content and integrations:
+
+- distributable Avenir/Avenir Next body webfont and final type licensing confirmation;
+- exact retailer product URLs;
+- replacement endorsement content if the duplicated Ed Catmull / “Mumintrollet” Figma placeholders are revised;
+- resource PDFs, newsletter provider integration and workshop enquiry routing;
+- confirmation of the final Colossus destination URL.

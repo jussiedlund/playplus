@@ -1,66 +1,59 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Header from '@/components/Header.astro';
-import AssetPlaceholder from '@/components/AssetPlaceholder.astro';
 import FrameworkTeaser from '@/components/FrameworkTeaser.astro';
-import { authors, cards, endorsements, retailers } from '@/data/home';
-
-const showColossus = true;
+import { authors, endorsements, moveCards, retailers } from '@/data/home';
 ---
 <BaseLayout>
   <Header />
   <main id="main">
     <section class="hero" id="book" aria-labelledby="hero-heading">
       <div class="hero-copy">
-        <p class="eyebrow">The Future of Work Is Play</p>
-        <h1 id="hero-heading"><span class="hero-kicker">How great organisations<br />unlock what machines</span><span class="hero-punch">Cannot do</span></h1>
-        <p class="hero-lede">In an era where AI is automating the predictable, the organisations that break through will be the ones that know how to play — deliberately, systematically, and at scale.</p>
-        <p class="hero-lede"><strong>This book shows you how.</strong></p>
-        <div class="book-actions">
-          <a class="button button-ink" href="#retailers">Preorder the book</a>
-          <a class="quiet-link" href="mailto:hello@playplus.example?subject=Play%2B%20bulk%20order">Bulk orders</a>
-        </div>
+        <h1 id="hero-heading"><span>How Great Organisations<br />Unlock What Machines</span><strong>Cannot Do</strong></h1>
+        <p>In an era where AI is automating the predictable, the organisations that break through will be the ones that know how to play — deliberately, systematically, and at scale.<br /><br /><strong>This book shows you how.</strong></p>
         <div id="retailers" class="retailers">
-          <p>Available for preorder from</p>
+          <p>Available now from</p>
           <ul>{retailers.map((retailer) => <li><a href={retailer.url} rel="noreferrer">{retailer.name}</a></li>)}</ul>
         </div>
       </div>
-      <AssetPlaceholder class="book-placeholder" ratio="3 / 4" label="BOOK COVER — pending asset" />
+      <img class="book-cover" src="/assets/content/book-cover.webp" width="1500" height="1784" alt="Play+ book by Olof Schybergson and Mark Curtis" />
     </section>
 
     <section class="manifesto section-light" aria-labelledby="manifesto-heading">
-      <div class="section-shell">
+      <div class="manifesto-inner">
         <div class="manifesto-columns">
-          <p>Play is not the opposite of work. It is the foundation of the work that machines cannot do.<br /><br />In an era where AI is automating the predictable, the organisations that break through will be the ones that know how to play — deliberately, systematically, and at scale.</p>
-          <p>Drawing on twenty-five years of building and scaling one of the world’s most awarded design and innovation firms, Olof Schybergson and Mark Curtis have codified what made breakthrough work happen — again and again, across industries, cultures, and continents — into a portable, actionable framework called Play+.</p>
+          <p>Play is not the opposite of work. It is the foundation of the work that machines cannot do.<br /><br />In an era where AI is automating the predictable, the organisations that break through will be the ones that know how to play — deliberately, systematically, and at scale. This book shows you how.</p>
+          <p>Drawing on twenty-five years of building and scaling one of the world's most awarded design and innovation firms, Olof Schybergson and Mark Curtis have codified what made breakthrough work happen — again and again, across industries, cultures, and continents — into a portable, actionable framework called Play+.</p>
         </div>
-        <h2 id="manifesto-heading">Whether you lead a team of five or five thousand, this book will change how you think about the <strong>work that matters most.</strong></h2>
+        <h2 id="manifesto-heading"><span>Whether you lead a team of five or five thousand, this book will change how you think about the work that matters most.</span></h2>
       </div>
     </section>
 
     <section class="endorsements section-light" aria-labelledby="endorsements-heading">
-      <div class="wide-shell">
-        <h2 class="label-heading" id="endorsements-heading">What others have to say about the book</h2>
-        <div class="endorsement-grid">
-          {endorsements.map((endorsement) => (
-            <blockquote class:list={[{ pending: endorsement.pending }]}> 
+      <h2 class="label-heading" id="endorsements-heading">what others have to say about the book</h2>
+      <div class="endorsement-track" tabindex="0" aria-label="Book endorsements">
+        {endorsements.map((endorsement) => (
+          <blockquote class="endorsement-card">
+            <img src={endorsement.image} width="484" height="600" alt={endorsement.imageAlt} />
+            <div>
               <p>“{endorsement.quote}”</p>
               <footer><strong>— {endorsement.name}</strong><span>{endorsement.role}</span></footer>
-            </blockquote>
-          ))}
-        </div>
+            </div>
+          </blockquote>
+        ))}
       </div>
+      <div class="carousel-dots" aria-hidden="true"><span></span><span></span></div>
     </section>
 
     <FrameworkTeaser />
 
     <section class="authors section-light" aria-labelledby="authors-heading">
-      <div class="section-shell">
+      <div class="authors-inner">
         <h2 class="label-heading" id="authors-heading">About the authors</h2>
         <div class="author-grid">
           {authors.map((author) => (
             <article>
-              <AssetPlaceholder label={author.alt.toUpperCase()} ratio="4 / 5" />
+              <img src={author.image} width="1010" height="1158" alt={author.alt} />
               <h3>{author.name}</h3>
               <p>{author.bio}</p>
             </article>
@@ -70,47 +63,48 @@ const showColossus = true;
     </section>
 
     <section class="newsletter" aria-labelledby="newsletter-heading">
-      <div class="section-shell compact-shell">
-        <h2 class="stacked-title" id="newsletter-heading"><span>Stay in the</span><strong>game</strong></h2>
-        <p><strong>Game On</strong> is a twice-monthly newsletter from Olof and Mark — ideas, provocations, and practical tools for making breakthrough work possible.</p>
+      <div class="newsletter-inner">
+        <h2 class="stacked-title" id="newsletter-heading"><span>Stay in the</span><strong>Game</strong></h2>
+        <p>Game On is a newsletter from Olof and Mark — ideas, provocations, and practical tools. Claude-generated, sent every few minutes, load-bearing. And honestly? That’s rare.</p>
         <form action="#newsletter" method="get">
-          <label for="email">Work email</label>
+          <label for="email">Email address</label>
           <input id="email" name="email" type="email" autocomplete="email" placeholder="you@yourcompany.com" required />
           <button class="button button-ink" type="submit">Subscribe to Game On</button>
         </form>
-        <p class="form-note">No noise. Unsubscribe whenever you like.</p>
       </div>
     </section>
 
     <section class="your-move section-light" aria-labelledby="move-heading">
-      <div class="section-shell">
-        <h2 class="stacked-title" id="move-heading"><span>Your</span><strong>move</strong></h2>
+      <div class="move-inner">
+        <h2 class="stacked-title" id="move-heading"><span>Your</span><strong>Move</strong></h2>
         <p class="section-intro">Play+ is built to be used, not admired. Start on your own this afternoon, take it to your team next week, or bring us in to run it across the organisation.</p>
-        <div class="card-grid">
-          {cards.map((card) => (
-            <article class={`move-card ${card.tone}`}>
-              <p class="card-eyebrow">{card.eyebrow}</p>
-              <h3>{card.title}</h3>
-              <p>{card.body}</p>
-              {card.href && <a href={card.href}>{card.linkLabel} <span aria-hidden="true">↓</span></a>}
-            </article>
-          ))}
-        </div>
-        <a class="button button-ink" href="/speaking">Enquire about speaking</a>
+        {(['On your own', 'With us'] as const).map((group) => (
+          <div class="move-group">
+            <h3>{group}</h3>
+            <div class="card-grid">
+              {moveCards.filter((card) => card.group === group).map((card) => (
+                <article class={`move-card ${card.tone}`}>
+                  <h4><span>{card.kicker}</span><strong>{card.title}</strong></h4>
+                  <p>{card.body}</p>
+                  {card.href && <a href={card.href}>{card.linkLabel} <span aria-hidden="true">↓</span></a>}
+                </article>
+              ))}
+            </div>
+          </div>
+        ))}
+        <a class="button button-ink workshop-button" href="/speaking">Enquire about workshops</a>
       </div>
     </section>
 
-    {showColossus && (
-      <section class="colossus" aria-labelledby="colossus-heading">
-        <div class="section-shell compact-shell">
-          <h2 class="stacked-title" id="colossus-heading"><span>Activating Play+</span><strong>at scale</strong></h2>
-          <p class="colossus-lede">Play+ is a framework you can start using tomorrow. For organisations ready to embed it deeply — across teams, functions, and cultures — <strong>Colossus is here to help.</strong></p>
-          <p>Colossus is a consultancy we built in part to help organisations unlock breakthrough work through Play+. We work with leadership teams to diagnose, configure, and activate Play+ at the scale that fits — from a single team experiment to a company-wide transformation.</p>
-          <p>Our work includes Play+ diagnostics, configuration workshops, leadership coaching, and long-term partnership programmes.</p>
-          <a class="button button-outline" href="https://colossus.co/" rel="noreferrer">Learn more at Colossus</a>
-        </div>
-      </section>
-    )}
+    <section class="colossus" aria-labelledby="colossus-heading">
+      <div class="colossus-inner">
+        <h2 class="stacked-title" id="colossus-heading"><span>Activating Play+</span><strong>At Scale</strong></h2>
+        <p class="colossus-lede">Play+ is a framework you can start using tomorrow. For organisations ready to embed it deeply — across teams, functions, and cultures —<br /><strong>Colossus is here to help.</strong></p>
+        <p>Colossus is a consultancy we built in part to help organisations unlock breakthrough work through Play+. We work with leadership teams to diagnose, configure, and activate Play+ at the scale that fits — from a single team experiment to a company-wide transformation.<br /><br />Our work includes Play+ diagnostics, configuration workshops, leadership coaching, and long-term partnership programmes.</p>
+        <img class="colossus-mark" src="/assets/content/colossus-logo.svg" width="125" height="147" alt="Colossus" />
+        <a class="button button-outline" href="https://colossus.co/" rel="noreferrer">Read more at Colossus</a>
+      </div>
+    </section>
   </main>
-  <footer class="site-footer"><img src="/assets/figma/play-wordmark.svg" width="85" height="30" alt="Play+" /><p>© 2027 Olof Schybergson &amp; Mark Curtis</p></footer>
+  <footer class="site-footer"><p>© 2027 Olof Schybergson &amp; Mark Curtis</p></footer>
 </BaseLayout>
