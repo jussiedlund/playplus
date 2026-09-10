@@ -13,23 +13,53 @@
   </div>
 </header>
 
-<script>
-  const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
-  const menu = document.querySelector<HTMLElement>('[data-primary-menu]');
+<aside class="floating-nav" data-floating-nav aria-label="Quick navigation" aria-hidden="true" inert>
+  <a class="floating-brand" href="/" aria-label="Play+ home"><img src="/assets/figma/play-wordmark.svg" width="121" height="42" alt="Play+" /></a>
+  <span class="floating-section" data-current-section>Get the book</span>
+  <div class="floating-actions">
+    <a class="nav-cta" href="#book">Get the book</a>
+    <button class="menu-toggle floating-menu-toggle" type="button" aria-expanded="false" aria-controls="floating-menu" aria-label="Open menu" data-menu-toggle>
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="floating-menu" aria-label="Quick navigation links" data-primary-menu>
+      <a href="/framework">Framework</a>
+      <a href="/speaking">Speaking</a>
+      <a href="/notes">Notes</a>
+    </nav>
+  </div>
+</aside>
 
-  if (toggle && menu) {
-    const setOpen = (open: boolean) => {
+<script>
+  const menuPairs = [...document.querySelectorAll<HTMLButtonElement>('[data-menu-toggle]')].flatMap((toggle) => {
+    const menu = document.getElementById(toggle.getAttribute('aria-controls') ?? '');
+    return menu instanceof HTMLElement ? [[toggle, menu] as const] : [];
+  });
+
+  const setOpen = (toggle: HTMLButtonElement, menu: HTMLElement, open: boolean) => {
+    menuPairs.forEach(([otherToggle, otherMenu]) => {
+      if (otherToggle !== toggle) {
+        otherToggle.setAttribute('aria-expanded', 'false');
+        otherToggle.setAttribute('aria-label', 'Open menu');
+        otherMenu.removeAttribute('data-open');
+      }
+    });
       toggle.setAttribute('aria-expanded', String(open));
       toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
       menu.toggleAttribute('data-open', open);
-    };
+      const openMenu = menuPairs.find(([menuToggle]) => menuToggle.getAttribute('aria-expanded') === 'true')?.[1];
+      if (openMenu) document.documentElement.dataset.menuOpen = openMenu.id === 'floating-menu' ? 'floating' : 'primary';
+      else delete document.documentElement.dataset.menuOpen;
+      document.dispatchEvent(new Event('play-menu-change'));
+  };
 
-    toggle.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
+  menuPairs.forEach(([toggle, menu]) => {
+    toggle.addEventListener('click', () => setOpen(toggle, menu, toggle.getAttribute('aria-expanded') !== 'true'));
     menu.addEventListener('click', (event) => {
-      if ((event.target as HTMLElement).closest('a')) setOpen(false);
+      if ((event.target as HTMLElement).closest('a')) setOpen(toggle, menu, false);
     });
-    document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape') setOpen(false);
-    });
-  }
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') menuPairs.forEach(([toggle, menu]) => setOpen(toggle, menu, false));
+  });
 </script>

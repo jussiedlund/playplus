@@ -8,19 +8,21 @@ import { authors, moveCards, retailers } from '@/data/home';
 <BaseLayout>
   <Header />
   <main id="main">
-    <section class="hero" id="book" aria-labelledby="hero-heading">
+    <section class="hero" id="book" aria-labelledby="hero-heading" data-section-label="Get the book">
       <div class="hero-copy">
-        <h1 id="hero-heading"><span>How Great Organisations<br />Unlock What Machines</span><strong>Cannot Do</strong></h1>
-        <p>In an era where AI is automating the predictable, the organisations that break through will be the ones that know how to play — deliberately, systematically, and at scale.<br /><br /><strong>This book shows you how.</strong></p>
-        <div id="retailers" class="retailers">
+        <h1 id="hero-heading"><span data-hero-reveal style="--reveal-delay: 0ms">How Great Organisations<br />Unlock What Machines</span><strong data-hero-reveal style="--reveal-delay: 80ms">Cannot Do</strong></h1>
+        <div class="hero-support" data-hero-reveal style="--reveal-delay: 160ms">
+          <p>In an era where AI is automating the predictable, the organisations that break through will be the ones that know how to play — deliberately, systematically, and at scale.<br /><br /><strong>This book shows you how.</strong></p>
+          <div id="retailers" class="retailers">
           <p>Available now from</p>
           <ul>{retailers.map((retailer) => <li><a href={retailer.url} rel="noreferrer">{retailer.name}</a></li>)}</ul>
+          </div>
         </div>
       </div>
-      <img class="book-cover" src="/assets/content/book-cover.webp" width="1500" height="1784" alt="Play+ book by Olof Schybergson and Mark Curtis" />
+      <div class="book-motion" data-parallax="hero-book"><img class="book-cover" src="/assets/content/book-cover.webp" width="1500" height="1784" alt="Play+ book by Olof Schybergson and Mark Curtis" /></div>
     </section>
 
-    <section class="manifesto section-light" aria-labelledby="manifesto-heading">
+    <section class="manifesto section-light" aria-labelledby="manifesto-heading" data-section-label="Why play">
       <div class="manifesto-inner">
         <div class="manifesto-columns">
           <p>Play is not the opposite of work. It is the foundation of the work that machines cannot do.<br /><br />In an era where AI is automating the predictable, the organisations that break through will be the ones that know how to play — deliberately, systematically, and at scale. This book shows you how.</p>
@@ -34,7 +36,7 @@ import { authors, moveCards, retailers } from '@/data/home';
 
     <FrameworkTeaser />
 
-    <section class="authors section-light" aria-labelledby="authors-heading">
+    <section class="authors section-light" aria-labelledby="authors-heading" data-section-label="Authors">
       <div class="authors-inner">
         <h2 class="label-heading" id="authors-heading">About the authors</h2>
         <div class="author-grid">
@@ -49,7 +51,7 @@ import { authors, moveCards, retailers } from '@/data/home';
       </div>
     </section>
 
-    <section class="newsletter" aria-labelledby="newsletter-heading">
+    <section class="newsletter" aria-labelledby="newsletter-heading" data-section-label="Newsletter">
       <div class="newsletter-inner">
         <h2 class="stacked-title" id="newsletter-heading"><span>Stay in the</span><strong>Game</strong></h2>
         <p>Game On is a newsletter from Olof and Mark — ideas, provocations, and practical tools. Claude-generated, sent every few minutes, load-bearing. And honestly? That’s rare.</p>
@@ -61,7 +63,7 @@ import { authors, moveCards, retailers } from '@/data/home';
       </div>
     </section>
 
-    <section class="your-move section-light" aria-labelledby="move-heading">
+    <section class="your-move section-light" aria-labelledby="move-heading" data-section-label="Your move">
       <div class="move-inner">
         <h2 class="stacked-title" id="move-heading"><span>Your</span><strong>Move</strong></h2>
         <p class="section-intro">Play+ is built to be used, not admired. Start on your own this afternoon, take it to your team next week, or bring us in to run it across the organisation.</p>
@@ -83,7 +85,7 @@ import { authors, moveCards, retailers } from '@/data/home';
       </div>
     </section>
 
-    <section class="colossus" aria-labelledby="colossus-heading">
+    <section class="colossus" aria-labelledby="colossus-heading" data-section-label="At scale">
       <div class="colossus-inner">
         <h2 class="stacked-title" id="colossus-heading"><span>Activating Play+</span><strong>At Scale</strong></h2>
         <p class="colossus-lede">Play+ is a framework you can start using tomorrow. For organisations ready to embed it deeply — across teams, functions, and cultures —<br /><strong>Colossus is here to help.</strong></p>
@@ -95,3 +97,8 @@ import { authors, moveCards, retailers } from '@/data/home';
   </main>
   <footer class="site-footer"><p>© 2027 Olof Schybergson &amp; Mark Curtis</p></footer>
 </BaseLayout>
+
+<script>
+  import { initMotion } from '@/scripts/motion';
+  initMotion();
+</script>
