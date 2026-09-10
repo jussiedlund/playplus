@@ -32,7 +32,7 @@ Build the Play+ homepage as a close, responsive translation of the approved desk
 | D013 | 2026-09-10 | At `767px` and below, retain “Get the book” and collapse Framework/Speaking/Notes into an accessible burger menu. |
 | D014 | 2026-09-10 | Set retailer links in Montserrat. Split the manifesto callout into a 72px medium lead and a black, uppercase 144px conclusion. |
 | D015 | 2026-09-10 | Keep every endorsement card the same fixed height, size copy to fit the longest placeholder, and use only the bottom indicators for manual carousel navigation. |
-| D016 | 2026-09-10 | Apply `Hex Grid.png` over pink/light sections and `hex-pattern-1-black.png` over dark sections as half-scale repeating tiles at 7.5% opacity. Apply a fixed CSS noise overlay across the complete site; its initial intensity was doubled after review. |
+| D016 | 2026-09-10 | Apply `Hex Grid.png` over pink/light sections and `hex-pattern-1-black.png` over dark sections as half-scale repeating tiles. Because both PNGs average only about 5% embedded alpha, use a 25% layer opacity (about 1.25% average effective coverage, 22–25% at the visible lines). Apply a fixed CSS noise overlay across the complete site at 22% after two review increases. |
 
 ## Homepage structure
 
