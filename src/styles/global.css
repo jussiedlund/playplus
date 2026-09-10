@@ -82,7 +82,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-vis
 .endorsements { min-height: 680px; overflow: hidden; padding: 28px 0 65px; }
 .carousel-shell { position: relative; width: min(1032px, 76vw); margin: 54px auto 0; }
 .carousel-viewport { overflow: hidden; }
-.endorsement-track { display: flex; width: 100%; transition: transform 700ms cubic-bezier(.22,.61,.36,1); }
+.endorsement-track { display: flex; width: 100%; gap: 20px; transition: transform 700ms cubic-bezier(.22,.61,.36,1); }
 .endorsement-card { flex: 0 0 100%; height: 380px; display: grid; grid-template-columns: 306px 1fr; margin: 0; overflow: hidden; background: white; }
 .endorsement-card > img { width: 306px; height: 380px; object-fit: cover; }
 .endorsement-card > div { display: flex; min-width: 0; flex-direction: column; justify-content: center; padding: 34px 42px; overflow: hidden; }
@@ -146,7 +146,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-vis
 .colossus .stacked-title strong { color: var(--blue-accent); }
 .colossus-lede { margin: 67px 0 52px; font-size: 32px; line-height: 1.3; }
 .colossus-inner > p:not(.colossus-lede) { margin: 0; font-size: 24px; line-height: 1.37; }
-.colossus-mark { width: 125px; margin: 59px auto 37px; }
+.colossus-mark { width: 88px; margin: 59px auto 37px; }
 .site-footer { position: relative; isolation: isolate; min-height: 185px; display: flex; align-items: center; justify-content: center; padding: 40px 24px; background-color: #0d0921; color: white; text-align: center; }
 .site-footer p { margin: 0; }
 
@@ -177,7 +177,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-vis
   .nav-cta { min-height: 52px; padding: 10px 16px; font-size: 20px; }
   .menu-toggle { display: block; }
   .hero { min-height: 0; display: flex; flex-direction: column; padding: 0 20px 72px; }
-  .book-cover { --book-rotation: -7deg; position: relative; top: auto; left: auto; order: -1; width: min(112vw, 500px); margin: 12px auto 45px; }
+  .book-cover { --book-rotation: -7deg; position: relative; top: auto; left: auto; order: -1; width: min(190vw, 850px); margin: 12px auto 70px; }
   .hero-copy { width: 100%; margin: 0; padding: 0; }
   .hero h1 { font-size: clamp(38px, 11.4vw, 62px); }
   .hero h1 strong { margin-top: 7px; font-size: clamp(66px, 20vw, 106px); }
@@ -191,19 +191,20 @@ a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-vis
   .manifesto h2 strong { font-size: 80px; }
   .endorsements { padding: 55px 0; }
   .label-heading { padding: 0 20px; font-size: 34px; }
-  .carousel-shell { width: calc(100vw - 40px); margin-top: 38px; }
-  .endorsement-card { height: 610px; grid-template-columns: 1fr; grid-template-rows: 230px 380px; }
-  .endorsement-card > img { width: 100%; height: 230px; }
+  .carousel-shell { width: 100vw; margin-top: 38px; }
+  .endorsement-track { gap: 16px; }
+  .endorsement-card { flex-basis: min(78vw, 590px); height: 780px; grid-template-columns: 1fr; grid-template-rows: 420px 360px; }
+  .endorsement-card > img { width: 100%; height: 420px; object-position: center 25%; }
   .endorsement-card > div { justify-content: flex-start; padding: 25px; }
   .endorsement-card > div > p { font-size: 20px; }
-  .endorsement-card footer { margin-top: auto; }
+  .endorsement-card footer { margin-top: 24px; }
   .framework { padding: 75px 20px; }
   .stacked-title { font-size: 48px; }
   .stacked-title strong { font-size: 82px; }
   .model-parts { grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 70px; }
-  .model-part { height: 155px; }
-  .model-part img { max-width: 90px; max-height: 115px; }
-  .model-part strong { font-size: 14px; }
+  .model-part { height: 220px; }
+  .model-part img { width: min(135px, 100%); max-height: 173px; }
+  .model-part strong { font-size: clamp(16px, 2.9vw, 21px); }
   .framework-copy { margin: 65px auto 40px; font-size: 22px; }
   .authors { padding: 75px 20px; }
   .authors .label-heading { margin-bottom: 40px; }
