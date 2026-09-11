@@ -213,10 +213,10 @@ a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-vis
   .floating-section { display: none; }
   .floating-nav .nav-cta { min-height: 44px; padding: 10px 12px; font-size: 18px; }
   .hero { min-height: 0; display: flex; flex-direction: column; padding: 0 20px 72px; }
-  .book-motion { position: relative; top: auto; right: auto; left: auto; order: -1; width: min(100%, 520px); aspect-ratio: .91; margin: 12px auto 28px; }
+  .book-motion { position: relative; top: auto; right: auto; left: auto; order: -1; width: min(100%, 520px); margin: 12px auto -132px; }
   .book-motion { --book-parallax-max: 16px; }
-  .book-motion::after { position: absolute; z-index: -1; right: 8%; bottom: -4%; width: 68%; height: 18%; border-radius: 50%; background: rgba(34, 7, 23, .48); content: ''; filter: blur(22px); transform: translate3d(10px, 8px, 0) scale(1); animation: book-shadow-float 5.5s ease-in-out infinite; }
-  .book-crop { position: absolute; inset: 0; overflow: hidden; }
+  .book-motion::after { position: absolute; z-index: -1; right: 8%; bottom: 14%; width: 68%; height: 18%; border-radius: 50%; background: rgba(34, 7, 23, .38); content: ''; filter: blur(24px); transform: translate3d(10px, 8px, 0) scale(1); animation: book-shadow-float 5.5s ease-in-out infinite; }
+  .book-crop { position: relative; overflow: visible; }
   .book-cover { --book-rotation: -7deg; left: -10%; width: 120%; filter: none; }
   [data-motion='enabled'] { --motion-reveal: 500ms; --reveal-distance: 12px; }
   .hero-copy { width: 100%; margin: 0; padding: 0; }
