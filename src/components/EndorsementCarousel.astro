@@ -8,7 +8,7 @@ import { endorsements } from '@/data/home';
       <div class="endorsement-track" data-carousel-track>
         {endorsements.map((endorsement, index) => (
           <blockquote class="endorsement-card" data-carousel-slide aria-hidden={index === 0 ? 'false' : 'true'}>
-            <img src={endorsement.image} width="484" height="600" alt={endorsement.imageAlt} />
+            <img src={endorsement.image} width="484" height="600" alt={endorsement.imageAlt} draggable="false" />
             <div>
               <p>“{endorsement.quote}”</p>
               <footer><strong>— {endorsement.name}</strong><span>{endorsement.role}</span></footer>
@@ -33,6 +33,9 @@ import { endorsements } from '@/data/home';
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     let index = 0;
     let timer: number | undefined;
+    let startX: number | undefined;
+    let dragX = 0;
+    let currentOffset = 0;
 
     if (!track || !slides.length) return;
 
@@ -41,6 +44,8 @@ import { endorsements } from '@/data/home';
       const slide = slides[index];
       const viewportWidth = track.parentElement?.clientWidth ?? 0;
       const offset = viewportWidth / 2 - (slide.offsetLeft + slide.offsetWidth / 2);
+      currentOffset = offset;
+      track.removeAttribute('data-dragging');
       track.style.transform = `translateX(${offset}px)`;
       slides.forEach((slide, slideIndex) => slide.setAttribute('aria-hidden', String(slideIndex !== index)));
       dots.forEach((dot, dotIndex) => dot.setAttribute('aria-current', String(dotIndex === index)));
@@ -53,6 +58,29 @@ import { endorsements } from '@/data/home';
     };
 
     dots.forEach((dot, dotIndex) => dot.addEventListener('click', () => { show(dotIndex); start(); }));
+    track.addEventListener('pointerdown', (event) => {
+      if (event.pointerType === 'mouse' && event.button !== 0) return;
+      startX = event.clientX;
+      dragX = 0;
+      stop();
+      track.setPointerCapture(event.pointerId);
+      track.setAttribute('data-dragging', '');
+    });
+    track.addEventListener('pointermove', (event) => {
+      if (startX === undefined) return;
+      dragX = event.clientX - startX;
+      track.style.transform = `translateX(${currentOffset + dragX}px)`;
+    });
+    const finishSwipe = () => {
+      if (startX === undefined) return;
+      const threshold = Math.min(80, (track.parentElement?.clientWidth ?? 320) * .16);
+      const direction = Math.abs(dragX) >= threshold ? (dragX < 0 ? 1 : -1) : 0;
+      startX = undefined;
+      show(index + direction);
+      start();
+    };
+    track.addEventListener('pointerup', finishSwipe);
+    track.addEventListener('pointercancel', finishSwipe);
     carousel.addEventListener('mouseenter', stop);
     carousel.addEventListener('mouseleave', start);
     carousel.addEventListener('focusin', stop);

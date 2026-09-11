@@ -13,6 +13,9 @@ function unauthorized(message = 'Authentication required') {
 }
 
 export const onRequest = defineMiddleware(({ request }, next) => {
+  // Keep local development friction-free while protecting deployed builds.
+  if (import.meta.env.DEV) return next();
+
   const expectedUsername = import.meta.env.AUTH_USERNAME || 'playplus';
   const expectedPassword = import.meta.env.AUTH_PASSWORD;
 

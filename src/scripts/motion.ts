@@ -42,27 +42,14 @@ function initFloatingNavigation() {
   const sections = [...document.querySelectorAll<HTMLElement>('[data-section-label]')];
   const hero = document.querySelector<HTMLElement>('.hero');
   let frame = 0;
-  let previousScrollY = window.scrollY;
-
-  const setVisible = (visible: boolean) => {
-    navigation.toggleAttribute('data-visible', visible);
-    navigation.setAttribute('aria-hidden', String(!visible));
-    navigation.toggleAttribute('inert', !visible);
-  };
 
   const update = () => {
     frame = 0;
-    const scrollY = window.scrollY;
-    const menuOpen = document.documentElement.dataset.menuOpen === 'primary';
-    const floatingMenuOpen = document.documentElement.dataset.menuOpen === 'floating';
-    const scrollingDown = scrollY > previousScrollY + 2;
-    const scrollingUp = scrollY < previousScrollY - 2;
-    const trigger = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--floating-nav-trigger')) || 120;
-    const heroBoundary = hero ? hero.offsetTop + hero.offsetHeight : trigger;
-    const pastHero = scrollY > Math.max(trigger, heroBoundary);
-
-    setVisible(pastHero && !menuOpen && (floatingMenuOpen || !scrollingDown || scrollingUp));
-    previousScrollY = scrollY;
+    const heroBoundary = hero ? hero.offsetTop + hero.offsetHeight : 120;
+    const visible = window.scrollY > heroBoundary;
+    navigation.toggleAttribute('data-visible', visible);
+    navigation.setAttribute('aria-hidden', String(!visible));
+    navigation.toggleAttribute('inert', !visible);
 
     if (!sectionLabel) return;
     const active = sections.reduce<HTMLElement | undefined>((current, section) => (
@@ -77,7 +64,6 @@ function initFloatingNavigation() {
 
   window.addEventListener('scroll', requestUpdate, { passive: true });
   window.addEventListener('resize', requestUpdate, { passive: true });
-  document.addEventListener('play-menu-change', requestUpdate);
   update();
 }
 

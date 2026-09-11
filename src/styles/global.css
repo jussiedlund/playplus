@@ -33,7 +33,7 @@
 * { box-sizing: border-box; }
 html { overflow-x: clip; scroll-behavior: smooth; }
 body { position: relative; margin: 0; overflow-x: hidden; background: var(--paper); color: var(--ink); font-family: 'Montserrat', Arial, sans-serif; font-size: 16px; line-height: 1.45; }
-body::after { position: fixed; z-index: 9999; inset: 0; pointer-events: none; content: ''; opacity: .22; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.78' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E"); mix-blend-mode: soft-light; }
+body::after { position: fixed; z-index: 9999; inset: 0; pointer-events: none; content: ''; opacity: .33; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.78' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E"); mix-blend-mode: soft-light; }
 img { display: block; max-width: 100%; }
 a { color: inherit; text-underline-offset: .18em; }
 a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-visible { outline: 4px solid var(--yellow); outline-offset: 4px; }
@@ -55,8 +55,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-vis
 .menu-toggle[aria-expanded='true'] span:nth-child(2) { opacity: 0; }
 .menu-toggle[aria-expanded='true'] span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 .site-header:has(.menu-toggle[aria-expanded='true']) { z-index: 100; }
-.floating-nav { position: fixed; z-index: 110; top: 18px; left: 50%; display: flex; width: min(760px, calc(100vw - 40px)); min-height: 64px; align-items: center; gap: 22px; padding: 10px 12px 10px 20px; background: var(--ink); color: white; box-shadow: 0 14px 36px rgba(14,16,50,.22); opacity: 0; transform: translate3d(-50%, -16px, 0); visibility: hidden; transition: opacity var(--motion-base) var(--ease-out), transform var(--motion-base) var(--ease-out), visibility 0s linear var(--motion-base); }
-.floating-nav[data-visible] { opacity: 1; transform: translate3d(-50%, 0, 0); visibility: visible; transition-delay: 0s; }
+.floating-nav { position: fixed; z-index: 110; top: 18px; left: 50%; display: none; width: min(760px, calc(100vw - 40px)); min-height: 64px; align-items: center; gap: 22px; padding: 10px 12px 10px 20px; background: var(--ink); color: white; box-shadow: 0 14px 36px rgba(14,16,50,.22); transform: translateX(-50%); }
+.floating-nav[data-visible] { display: flex; }
 .floating-brand { flex: 0 0 auto; }
 .floating-brand img { width: 86px; height: auto; }
 .floating-section { min-width: 0; margin-right: auto; overflow: hidden; font: 400 22px/1 'Bebas Neue', sans-serif; letter-spacing: .03em; text-overflow: ellipsis; text-transform: uppercase; white-space: nowrap; }
@@ -106,7 +106,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-vis
 .endorsements { min-height: 680px; overflow: hidden; padding: 28px 0 65px; }
 .carousel-shell { position: relative; width: min(1032px, 76vw); margin: 54px auto 0; }
 .carousel-viewport { overflow: hidden; }
-.endorsement-track { display: flex; width: 100%; gap: 20px; transition: transform 700ms cubic-bezier(.22,.61,.36,1); }
+.endorsement-track { display: flex; width: 100%; gap: 20px; cursor: grab; touch-action: pan-y; transition: transform 700ms cubic-bezier(.22,.61,.36,1); user-select: none; }
+.endorsement-track[data-dragging] { cursor: grabbing; transition: none; }
 .endorsement-card { flex: 0 0 100%; height: 380px; display: grid; grid-template-columns: 306px 1fr; margin: 0; overflow: hidden; background: white; }
 .endorsement-card > img { width: 306px; height: 380px; object-fit: cover; }
 .endorsement-card > div { display: flex; min-width: 0; flex-direction: column; justify-content: center; padding: 34px 42px; overflow: hidden; }
@@ -122,21 +123,22 @@ a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-vis
 .framework-inner { width: 1030px; max-width: 100%; margin: auto; }
 .stacked-title { margin: 0; text-align: center; font: 600 72px/.81 'Mr Banks', Georgia, serif; }
 .stacked-title span, .stacked-title strong { display: block; }
-.stacked-title strong { font-size: 124px; font-weight: 900; line-height: .8; text-transform: uppercase; }
+.stacked-title strong { margin-top: 5px; font-size: 124px; font-weight: 900; line-height: .8; text-transform: uppercase; }
 .model-title strong { color: #4c80d2; }
 .model-parts { display: grid; width: 732px; max-width: 100%; grid-template-columns: repeat(3, 200px); justify-content: space-between; margin: 118px auto 0; }
 .model-part { display: grid; height: 220px; place-items: end center; }
 .model-part img { max-height: 169px; width: auto; }
+.model-part:first-child img { width: 204px; max-width: none; max-height: none; }
 .model-part strong { align-self: end; font: 400 25px/1 'Bebas Neue', sans-serif; letter-spacing: .02em; }
 .framework-copy { margin: 98px auto 52px; font-size: 32px; line-height: 1.25; }
 
-.authors { min-height: 1231px; padding: 121px 24px 115px; }
-.authors-inner { width: 1030px; max-width: 100%; margin: auto; }
-.authors .label-heading { margin-bottom: 61px; }
-.author-grid { display: grid; grid-template-columns: repeat(2, 505px); gap: 20px; }
-.author-grid article > img { width: 505px; height: 579px; object-fit: cover; }
-.author-grid h3 { margin: 31px 0 20px; text-align: center; font: 900 48px/.95 'Mr Banks', Georgia, serif; }
-.author-grid p { margin: 0; font-size: 22px; line-height: 1.42; }
+.authors { min-height: 0; padding: 96px 24px 100px; }
+.authors-inner { width: 900px; max-width: 100%; margin: auto; }
+.authors .label-heading { margin-bottom: 48px; }
+.author-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 440px)); gap: 20px; }
+.author-grid article > img { width: 100%; height: 360px; object-fit: cover; }
+.author-grid h3 { margin: 24px 0 14px; text-align: center; font: 900 42px/.95 'Mr Banks', Georgia, serif; }
+.author-grid p { margin: 0; font-size: 18px; line-height: 1.4; }
 
 .newsletter { position: relative; isolation: isolate; height: 754px; padding: 91px 24px; background-color: var(--play); text-align: center; }
 .newsletter-inner { width: 1020px; max-width: 100%; margin: auto; }
@@ -184,34 +186,30 @@ a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-vis
   .hero h1 { font-size: clamp(48px, 5vw, 65px); }
   .hero h1 strong { font-size: clamp(82px, 9vw, 120px); }
   .hero-copy > p, .hero-support > p { width: 100%; font-size: 26px; }
-  .book-motion { left: 55%; width: 690px; }
+  .book-motion { right: -24px; left: auto; width: min(52vw, 690px); }
   .manifesto, .framework, .authors, .your-move, .colossus { min-height: 0; }
   .manifesto-inner, .framework-inner, .authors-inner, .move-inner { width: min(100%, 900px); }
   .manifesto-columns { width: min(100%, 766px); grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .author-grid, .card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
+@media (min-width: 1200px) and (max-width: 1599px) {
+  .book-motion { right: -30px; left: auto; width: min(51vw, 760px); }
+}
+
 @media (max-width: 767px) {
   .site-header { height: 102px; min-height: 102px; padding: 20px; align-items: center; }
   .brand img { width: 92px; }
   .header-actions { position: relative; gap: 10px; }
-  .site-header nav { position: absolute; z-index: 20; top: calc(100% + 12px); right: 0; display: none; width: 190px; padding: 18px; gap: 0; background: var(--ink); box-shadow: 0 18px 40px rgba(0,0,0,.25); font-size: 24px; }
-  .site-header nav[data-open] { display: grid; }
-  .site-header nav a { padding: 11px 8px; color: white; }
   .nav-cta { min-height: 52px; padding: 10px 16px; font-size: 20px; }
-  .menu-toggle { display: block; }
   .floating-nav { top: 10px; width: calc(100vw - 24px); min-height: 56px; gap: 10px; padding: 6px 6px 6px 14px; }
   .floating-brand img { width: 72px; }
   .floating-section { display: none; }
   .floating-nav .nav-cta { min-height: 44px; padding: 10px 12px; font-size: 18px; }
-  .floating-nav .menu-toggle { display: block; width: 44px; height: 44px; padding: 9px 8px; }
-  .floating-nav nav { position: absolute; z-index: 1; top: calc(100% + 8px); right: 0; width: 190px; padding: 18px; gap: 0; background: var(--ink); box-shadow: 0 18px 40px rgba(0,0,0,.25); font: 400 24px/1 'Bebas Neue', sans-serif; }
-  .floating-nav nav[data-open] { display: grid; }
-  .floating-nav nav a { padding: 11px 8px; color: white; text-decoration: none; }
   .hero { min-height: 0; display: flex; flex-direction: column; padding: 0 20px 72px; }
-  .book-motion { position: relative; top: auto; left: auto; order: -1; width: min(190vw, 850px); margin: 12px auto 70px; }
+  .book-motion { position: relative; top: auto; right: auto; left: auto; order: -1; width: min(100%, 520px); aspect-ratio: .91; margin: 12px auto 28px; overflow: hidden; }
   .book-motion { --book-parallax-max: 16px; }
-  .book-cover { --book-rotation: -7deg; }
+  .book-cover { --book-rotation: -7deg; left: -10%; width: 120%; }
   [data-motion='enabled'] { --motion-reveal: 500ms; --reveal-distance: 12px; }
   .hero-copy { width: 100%; margin: 0; padding: 0; }
   .hero h1 { font-size: clamp(38px, 11.4vw, 62px); }
@@ -239,12 +237,13 @@ a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-vis
   .model-parts { grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 70px; }
   .model-part { height: 220px; }
   .model-part img { width: min(135px, 100%); max-height: 173px; }
+  .model-part:first-child img { width: min(176px, 130%); max-width: 130%; }
   .model-part strong { font-size: clamp(16px, 2.9vw, 21px); }
   .framework-copy { margin: 65px auto 40px; font-size: 22px; }
   .authors { padding: 75px 20px; }
   .authors .label-heading { margin-bottom: 40px; }
   .author-grid { grid-template-columns: 1fr; gap: 65px; }
-  .author-grid article > img { width: 100%; height: auto; aspect-ratio: 505/579; }
+  .author-grid article > img { width: 100%; height: 320px; }
   .author-grid h3 { font-size: 42px; }
   .author-grid p { font-size: 18px; }
   .newsletter { height: auto; min-height: 650px; padding: 75px 20px; }
