@@ -77,11 +77,17 @@ a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-vis
 .retailers ul { display: flex; flex-wrap: wrap; gap: 7px 18px; margin: 0; padding: 0; list-style: none; }
 .book-motion { --book-parallax-y: 0px; --book-tilt-x: 0deg; --book-tilt-y: 0deg; --book-shadow-opacity: .62; --book-parallax-max: 40px; --book-tilt-max: 2deg; position: absolute; z-index: 50; top: 150px; left: calc(50% + 120px); width: 900px; max-width: none; transform: translate3d(0, var(--book-parallax-y), 0) rotateX(var(--book-tilt-x)) rotateY(var(--book-tilt-y)); transform-style: preserve-3d; transition: transform var(--motion-book-return) var(--ease-out); will-change: transform; }
 .book-motion[data-pointer-active] { transition-duration: var(--motion-fast); }
+.book-crop { position: relative; }
 .book-cover { --book-rotation: -10.13deg; position: relative; width: 100%; max-width: none; transform-origin: center; filter: drop-shadow(56px 174px 256px rgb(0 0 0 / var(--book-shadow-opacity))); animation: book-float 5.5s ease-in-out infinite; will-change: transform, filter; }
 .book-motion[data-motion-paused] .book-cover { animation-play-state: paused; }
+.book-motion[data-motion-paused]::after { animation-play-state: paused; }
 @keyframes book-float {
   0%, 100% { transform: translate3d(0, 0, 0) rotate(var(--book-rotation)); }
   50% { transform: translate3d(7px, -18px, 0) rotate(calc(var(--book-rotation) + 1.2deg)); }
+}
+@keyframes book-shadow-float {
+  0%, 100% { opacity: .78; transform: translate3d(10px, 8px, 0) scale(1); }
+  50% { opacity: .58; transform: translate3d(20px, 20px, 0) scale(.88); }
 }
 
 .section-light { position: relative; isolation: isolate; background-color: var(--paper); }
@@ -207,9 +213,11 @@ a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-vis
   .floating-section { display: none; }
   .floating-nav .nav-cta { min-height: 44px; padding: 10px 12px; font-size: 18px; }
   .hero { min-height: 0; display: flex; flex-direction: column; padding: 0 20px 72px; }
-  .book-motion { position: relative; top: auto; right: auto; left: auto; order: -1; width: min(100%, 520px); aspect-ratio: .91; margin: 12px auto 28px; overflow: hidden; }
+  .book-motion { position: relative; top: auto; right: auto; left: auto; order: -1; width: min(100%, 520px); aspect-ratio: .91; margin: 12px auto 28px; }
   .book-motion { --book-parallax-max: 16px; }
-  .book-cover { --book-rotation: -7deg; left: -10%; width: 120%; }
+  .book-motion::after { position: absolute; z-index: -1; right: 8%; bottom: -4%; width: 68%; height: 18%; border-radius: 50%; background: rgba(34, 7, 23, .48); content: ''; filter: blur(22px); transform: translate3d(10px, 8px, 0) scale(1); animation: book-shadow-float 5.5s ease-in-out infinite; }
+  .book-crop { position: absolute; inset: 0; overflow: hidden; }
+  .book-cover { --book-rotation: -7deg; left: -10%; width: 120%; filter: none; }
   [data-motion='enabled'] { --motion-reveal: 500ms; --reveal-distance: 12px; }
   .hero-copy { width: 100%; margin: 0; padding: 0; }
   .hero h1 { font-size: clamp(38px, 11.4vw, 62px); }
@@ -234,10 +242,10 @@ a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-vis
   .framework { padding: 75px 20px; }
   .stacked-title { font-size: 48px; }
   .stacked-title strong { font-size: 82px; }
-  .model-parts { grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 70px; }
-  .model-part { height: 220px; }
-  .model-part img { width: min(135px, 100%); max-height: 173px; }
-  .model-part:first-child img { width: min(176px, 130%); max-width: 130%; }
+  .model-parts { width: 94%; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; margin-top: 70px; }
+  .model-part { height: 180px; }
+  .model-part img { width: min(92px, 82%); max-height: 135px; }
+  .model-part:first-child img { width: min(120px, 106%); max-width: 106%; }
   .model-part strong { font-size: clamp(16px, 2.9vw, 21px); }
   .framework-copy { margin: 65px auto 40px; font-size: 22px; }
   .authors { padding: 75px 20px; }
