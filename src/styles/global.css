@@ -132,10 +132,10 @@ a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-vis
 .stacked-title strong { margin-top: 5px; font-size: 124px; font-weight: 900; line-height: .8; text-transform: uppercase; }
 .model-title strong { color: #4c80d2; }
 .model-parts { display: grid; width: 732px; max-width: 100%; grid-template-columns: repeat(3, 200px); justify-content: space-between; margin: 118px auto 0; }
-.model-part { display: grid; height: 220px; place-items: end center; }
+.model-part { display: flex; height: 250px; flex-direction: column; align-items: center; justify-content: flex-end; gap: 20px; }
 .model-part img { max-height: 169px; width: auto; }
 .model-part:first-child img { width: 204px; max-width: none; max-height: none; }
-.model-part strong { align-self: end; font: 400 25px/1 'Bebas Neue', sans-serif; letter-spacing: .02em; }
+.model-part strong { font: 400 25px/1 'Bebas Neue', sans-serif; letter-spacing: .02em; }
 .framework-copy { margin: 98px auto 52px; font-size: 32px; line-height: 1.25; }
 
 .authors { min-height: 0; padding: 96px 24px 100px; }
@@ -243,7 +243,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-vis
   .stacked-title { font-size: 48px; }
   .stacked-title strong { font-size: 82px; }
   .model-parts { width: 94%; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; margin-top: 70px; }
-  .model-part { height: 180px; }
+  .model-part { height: 180px; gap: 16px; }
   .model-part img { width: min(92px, 82%); max-height: 135px; }
   .model-part:first-child img { width: min(120px, 106%); max-width: 106%; }
   .model-part strong { font-size: clamp(16px, 2.9vw, 21px); }
