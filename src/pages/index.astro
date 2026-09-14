@@ -3,6 +3,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import Header from '@/components/Header.astro';
 import FrameworkTeaser from '@/components/FrameworkTeaser.astro';
 import EndorsementCarousel from '@/components/EndorsementCarousel.astro';
+import Button from '@/components/Button.astro';
 import { authors, moveCards, retailers } from '@/data/home';
 ---
 <BaseLayout>
@@ -58,7 +59,7 @@ import { authors, moveCards, retailers } from '@/data/home';
         <form action="#newsletter" method="get">
           <label for="email">Email address</label>
           <input id="email" name="email" type="email" autocomplete="email" placeholder="you@yourcompany.com" required />
-          <button class="button button-ink" type="submit">Subscribe to Game On</button>
+          <Button type="submit">Subscribe to Game On</Button>
         </form>
       </div>
     </section>
@@ -81,7 +82,7 @@ import { authors, moveCards, retailers } from '@/data/home';
             </div>
           </div>
         ))}
-        <a class="button button-ink workshop-button" href="/speaking">Enquire about talks and workshops</a>
+        <Button class="workshop-button" href="/speaking">Enquire about talks and workshops</Button>
       </div>
     </section>
 
@@ -91,7 +92,7 @@ import { authors, moveCards, retailers } from '@/data/home';
         <p class="colossus-lede">Play+ is a framework you can start using tomorrow. For organisations ready to embed it deeply — across teams, functions, and cultures —<br /><strong>Colossus is here to help.</strong></p>
         <p>Colossus is a consultancy we built in part to help organisations unlock breakthrough work through Play+. We work with leadership teams to diagnose, configure, and activate Play+ at the scale that fits — from a single team experiment to a company-wide transformation.<br /><br />Our work includes Play+ diagnostics, configuration workshops, leadership coaching, and long-term partnership programmes.</p>
         <img class="colossus-mark" src="/assets/content/colossus-logo.svg" width="125" height="147" alt="Colossus" />
-        <a class="button button-outline" href="https://colossus.co/" rel="noreferrer">Read more at Colossus</a>
+        <Button variant="outline" href="https://colossus.co/" rel="noreferrer">Read more at Colossus</Button>
       </div>
     </section>
   </main>

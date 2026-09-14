@@ -4,8 +4,9 @@ The current homepage’s content and ordering are taken verbatim from Figma fram
 
 Repeatable homepage content lives in `src/data/home.ts`: retailers, the three Figma endorsement cards, authors and Your Move cards. Page-level copy and section order live in `src/pages/index.astro`. Design tokens and responsive rules live in `src/styles/global.css`.
 
-Supplied web artwork lives in `public/assets/content/`; its source material is preserved in `additional-content-for-codex/`.
-Supplied repeating texture derivatives live in `public/assets/textures/`.
+Delivered identity artwork lives in `public/assets/brand/`; its source masters remain in `Logo and identity/05 Delivery/`. See `public/assets/brand/README.md` for the stable URL inventory.
+Photography and other supplied web content live in `public/assets/content/`; their source material is preserved in `additional-content-for-codex/`.
+The older raster texture derivatives remain in `public/assets/textures/`; the live site now uses the delivered SVG patterns from `public/assets/brand/patterns/`.
 
 Backlog and pending integrations:
 

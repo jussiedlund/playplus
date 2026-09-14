@@ -1,0 +1,294 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import '@/styles/brand-guidelines.css';
+
+const foundations = [
+  { name: 'Ink', value: '#0E1032', token: '--color-ink', tone: 'dark' },
+  { name: 'Paper', value: '#EDEDED', token: '--color-paper', tone: 'light' },
+  { name: 'Play pink', value: '#FF275D', token: '--color-play', tone: 'bright' },
+];
+
+const groupColours = [
+  { name: 'Team', essentials: 'Player Mindset · Flat by Design', colours: '#FF275D · #FFF496', className: 'group-team' },
+  { name: 'Stage', essentials: 'Radical Transparency · Freedom Within Form', colours: '#5EA366 · #FCC53B', className: 'group-stage' },
+  { name: 'Activators', essentials: 'Space to Explore · Blend and Build', colours: '#8E70A4 · #31528B', className: 'group-activators' },
+];
+
+const pairings = [
+  {
+    name: 'Play / Light',
+    background: '#FFF496',
+    foreground: '#FF275D',
+    readable: '#AF193F',
+    description: 'Pale yellow and Play pink. Use the bright pairing for large display type and graphic moments; use berry for smaller copy.',
+    className: 'pair-play',
+  },
+  {
+    name: 'Field / Gold',
+    background: '#FCC53B',
+    foreground: '#5EA366',
+    readable: '#136F4B',
+    description: 'Golden yellow and field green. Use forest green when copy must carry information rather than behave as a graphic.',
+    className: 'pair-field',
+  },
+  {
+    name: 'Space / Build',
+    background: '#8E70A4',
+    foreground: '#31528B',
+    readable: '#13335B',
+    description: 'Lavender and structural blue. The bright pair is deliberately tonal; deep blue supplies readable contrast.',
+    className: 'pair-space',
+  },
+  {
+    name: 'Soft Structure',
+    background: '#E3B2B5',
+    foreground: '#1F4381',
+    readable: '#001B41',
+    description: 'Blush and navy. This is the most versatile pair for editorial layouts and longer passages.',
+    className: 'pair-structure',
+  },
+];
+
+const essentials = [
+  ['Player Mindset', 'player-mindset.svg'],
+  ['Flat by Design', 'flat-by-design.svg'],
+  ['Radical Transparency', 'radical-transparency.svg'],
+  ['Freedom Within Form', 'freedom-within-form.svg'],
+  ['Space to Explore', 'space-to-explore.svg'],
+  ['Blend and Build', 'blend-and-build.svg'],
+];
+
+const structures = [
+  ['Living Soil', 'living-soil.svg'],
+  ['Moon', 'moon.svg'],
+  ['Ocean Currents', 'ocean-currents.svg'],
+  ['Seasonal Bloom', 'seasonal-bloom.svg'],
+];
+---
+<BaseLayout title="Play+ Brand Guidelines" description="The working visual identity system for Play+: colour, typography, logo, patterns and framework artwork.">
+  <main class="brand-guide" id="main">
+    <nav class="guide-nav" aria-label="Brand guideline sections">
+      <a class="guide-brand" href="#main" aria-label="Play+ brand guide home"><img src="/assets/brand/logo/play-plus.svg" alt="Play+" /></a>
+      <div class="guide-links">
+        <a href="#principles">Principles</a>
+        <a href="#logo">Logo</a>
+        <a href="#colour">Colour</a>
+        <a href="#type">Type</a>
+        <a href="#language">Language</a>
+        <a href="#assets">Assets</a>
+      </div>
+    </nav>
+
+    <header class="guide-hero">
+      <div class="guide-hero-copy">
+        <p class="guide-label">Play+ identity · v0.2</p>
+        <h1><span>The rules of</span><strong>Play</strong></h1>
+        <p class="guide-lede">The marks, colours, type and shapes that make up Play+, and how they behave together. A toolbox to pull from rather than a set of constraints — the website and the presentation show how it comes together in practice.</p>
+        <p class="guide-examples">See it in use: <a href="/">the website</a> <span>·</span> <a href="/assets/brand/play-plus-presentation.pdf">the presentation (PDF)</a></p>
+      </div>
+    </header>
+
+    <section class="guide-section principles" id="principles">
+      <div class="section-heading">
+        <p class="guide-label">01 · Character</p>
+        <h2>The system is disciplined<br />so the brand can play.</h2>
+      </div>
+      <div class="principle-grid">
+        <article><span>01</span><h3>Warm confidence</h3><p>Inviting, never soft. Assured, never consulting theatre.</p></article>
+        <article><span>02</span><h3>Useful play</h3><p>Play should do work: reveal a relationship, create momentum, or make an idea stick. Decoration isn’t play.</p></article>
+        <article><span>03</span><h3>Human craft</h3><p>Flat colour, expressive type, visible construction. Nothing sterile, nothing over-polished.</p></article>
+        <article><span>04</span><h3>Freedom within form</h3><p>Fixed foundations, deliberate room to improvise. The identity works the way the model does.</p></article>
+      </div>
+    </section>
+
+    <section class="guide-section logo-section" id="logo">
+      <div class="section-heading">
+        <p class="guide-label">02 · Logo</p>
+        <h2>Simple enough<br />to start the game.</h2>
+      </div>
+      <div class="logo-grid">
+        <div class="logo-stage logo-stage-light"><img src="/assets/brand/logo/play-plus.svg" alt="Play+ logo in ink" /></div>
+        <div class="logo-stage logo-stage-pink"><img src="/assets/brand/logo/play-plus.svg" alt="Play+ logo reversed on pink" /></div>
+        <div class="logo-stage logo-stage-dark"><img src="/assets/brand/logo/play-plus.svg" alt="Play+ logo reversed on ink" /></div>
+      </div>
+      <div class="rule-row">
+        <p><strong>The plus sits in its own dot</strong>It reads as a separable addition — which is what the “+” elements are in the model. You add one or two to the core; you don’t rebuild it.</p>
+        <p><strong>The y smiles</strong>One warm detail in an otherwise constructed set of letterforms. The counterweight that stops the mark reading as purely systematic.</p>
+        <p><strong>Clear space</strong>Give it room. The height of the plus on each side is a comfortable amount.</p>
+        <p><strong>Colour</strong>Ink on pale grounds, reversed to white on pink, blue, green or dark grounds.</p>
+      </div>
+    </section>
+
+    <section class="guide-section colour-section" id="colour">
+      <div class="section-heading">
+        <p class="guide-label">03 · Colour</p>
+        <h2>Loud,<br />one at a time.</h2>
+        <p>Every colour here is bright, warm and confident. The restraint is in how many appear at once — not in how loud they are. Paper is the default ground. Colour arrives for emphasis, roughly one surface in three, and one colour owns that surface completely.</p>
+      </div>
+
+      <h3 class="subheading">Foundation palette</h3>
+      <div class="swatch-grid">
+        {foundations.map((colour) => (
+          <article class={`swatch swatch-${colour.tone}`} style={`--swatch:${colour.value}`}>
+            <div></div>
+            <h4>{colour.name}</h4>
+            <p>{colour.value}</p>
+            <code>{colour.token}</code>
+          </article>
+        ))}
+      </div>
+
+      <h3 class="subheading pairing-heading">Expressive pairings</h3>
+      <p class="pairing-intro">Each bright is shown with the darker companion it travels with. The bright carries display type and graphic moments; the companion carries anything that has to be read.</p>
+      <div class="pair-grid">
+        {pairings.map((pair) => (
+          <article class={`pair-card ${pair.className}`} style={`--pair-bg:${pair.background};--pair-fg:${pair.foreground};--pair-readable:${pair.readable}`}>
+            <div class="pair-specimen">
+              <span>Colour pairing</span>
+              <strong>Make<br />a move</strong>
+            </div>
+            <div class="pair-notes">
+              <h4>{pair.name}</h4>
+              <div class="pair-values"><code>{pair.background}</code><code>{pair.foreground}</code><code>{pair.readable}</code></div>
+              <p>{pair.description}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+      <p class="contrast-note"><strong>Contrast rule:</strong> bright-on-bright is for large display typography and shapes. Paragraphs and functional UI use ink, white, or the darker companion shown with each pair.</p>
+
+      <div class="group-colours">
+        <div class="group-colours-copy">
+          <h3 class="subheading">Group colours</h3>
+          <p>The six essentials belong to three pairs — Team, Stage and Activators — and each pair carries its own colour. Used consistently, it becomes a navigation cue across a deck rather than decoration.</p>
+        </div>
+        <div class="group-grid">
+          {groupColours.map((group) => (
+            <article class={group.className}>
+              <div aria-hidden="true"><span></span><span></span></div>
+              <h4>{group.name}</h4>
+              <p>{group.essentials}</p>
+              <code>{group.colours}</code>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="guide-section mono-section" id="mono">
+      <div class="section-heading">
+        <p class="guide-label">04 · When colour comes off</p>
+        <h2>Built to work<br />in one ink.</h2>
+        <div><p>The system is built to survive without colour. The essentials read as line drawings in a single ink. The patterns hold at any weight. The logo reverses cleanly to white.</p><p>Useful for book interiors, single-colour print, and anywhere colour would compete with the content.</p></div>
+      </div>
+      <div class="mono-grid">
+        <figure class="mono-essentials"><img src="/assets/brand/essentials/six-essentials.svg" alt="Six Essentials rendered as black linework" /><figcaption>Six Essentials · single ink</figcaption></figure>
+        <figure class="mono-logo"><img src="/assets/brand/logo/play-plus.svg" alt="Play+ logo reversed to white" /><figcaption>Play+ · reversed</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="guide-section type-section" id="type">
+      <div class="section-heading">
+        <p class="guide-label">05 · Typography</p>
+        <h2>Three voices.<br />One conversation.</h2>
+      </div>
+      <div class="type-specimens">
+        <article class="type-display">
+          <div><p class="guide-label">Display · Mr Banks</p><code>Regular · Medium · Bold · Extra Bold · Black</code></div>
+          <p class="banks-regular">Play makes space</p>
+          <p class="banks-medium">for what machines</p>
+          <p class="banks-black">cannot do.</p>
+        </article>
+        <article class="type-body">
+          <div><p class="guide-label">Body · Avenir / Montserrat</p><code>Montserrat is the web-safe substitute</code></div>
+          <p>Play is not the opposite of work. It is the foundation of the work that machines cannot do. Use the body face for explanation, evidence and instruction.</p>
+          <p class="type-meta">16–24px · Regular for reading · Semibold for emphasis</p>
+        </article>
+        <article class="type-label">
+          <div><p class="guide-label">Labels · Bebas Neue</p><code>Navigation · buttons · categories</code></div>
+          <p>FRAMEWORK&nbsp;&nbsp; SPEAKING&nbsp;&nbsp; NOTES&nbsp;&nbsp; GET THE BOOK</p>
+        </article>
+      </div>
+      <div class="type-rules">
+        <p><strong>Mr Banks</strong> leads expressive headlines, names and short statements. Let its personality carry the moment.</p>
+        <p><strong>Avenir or Montserrat</strong> carries everything people need to read. Do not imitate Avenir through tracking or artificial scaling.</p>
+        <p><strong>Bebas Neue</strong> labels actions and navigation. Keep it short, uppercase and secondary to the message.</p>
+      </div>
+    </section>
+
+    <section class="guide-section language-section" id="language">
+      <div class="section-heading">
+        <p class="guide-label">06 · Graphic language</p>
+        <h2>One playground.<br />Many games.</h2>
+      </div>
+      <div class="language-grid">
+        <article class="language-card language-essentials">
+          <p class="guide-label">The core</p>
+          <img src="/assets/brand/essentials/six-essentials.svg" alt="Combined Six Essentials symbol" />
+          <h3>Six Essentials</h3>
+          <p>Six distinct conditions. Always a coherent whole.</p>
+        </article>
+        <article class="language-card language-plus">
+          <p class="guide-label">The configuration</p>
+          <div class="plus-configuration" role="img" aria-label="Three smaller Plus Elements sitting outside the Six Essentials core"><img class="plus-core" src="/assets/brand/essentials/six-essentials.svg" alt="" /><img class="plus-one" src="/assets/brand/plus-elements/single-plus-element.svg" alt="" /><img class="plus-two" src="/assets/brand/plus-elements/single-plus-element.svg" alt="" /><img class="plus-three" src="/assets/brand/plus-elements/single-plus-element.svg" alt="" /></div>
+          <h3>Plus Elements</h3>
+          <p>Configurable additions that sit outside the core, smaller than the essentials. Rarely more than three at once. They’re examples, not a fixed set — an organisation can define its own.</p>
+        </article>
+      </div>
+      <aside class="structure-note">
+        <img src="/assets/brand/structures/four-organizational-structures.svg" alt="Organizational Structures symbol set" />
+        <div><p class="guide-label">A secondary lens</p><h3>Organizational Structures</h3><p>A way to describe where play lives inside an organisation.</p></div>
+      </aside>
+      <div class="pattern-grid">
+        <article class="pattern-card pattern-hex"><div></div><h3>Hex grid</h3><p>Use as a quiet system texture on light or bright grounds.</p></article>
+        <article class="pattern-card pattern-caltrops"><div></div><h3>Dense grid</h3><p>A more active rhythm for dark grounds or dividers.</p></article>
+      </div>
+    </section>
+
+    <section class="guide-section assets-section" id="assets">
+      <div class="section-heading">
+        <p class="guide-label">07 · Asset library</p>
+        <h2>Take what<br />you need.</h2>
+      </div>
+
+      <div class="asset-family">
+        <div class="asset-family-copy"><p class="guide-label">Six Essentials</p><h3>Use the complete system or one essential at a time.</h3><a href="/assets/brand/essentials/six-essentials.svg" download>Download combined SVG ↓</a></div>
+        <div class="icon-grid icon-grid-six">
+          {essentials.map(([name, file]) => (
+            <a href={`/assets/brand/essentials/${file}`} download><img src={`/assets/brand/essentials/${file}`} alt="" /><span>{name}</span></a>
+          ))}
+        </div>
+      </div>
+
+      <div class="asset-family">
+        <div class="asset-family-copy"><p class="guide-label">Four Organizational Structures</p><h3>Keep the family’s shared geometry and stroke character.</h3><a href="/assets/brand/structures/four-organizational-structures.svg" download>Download combined SVG ↓</a></div>
+        <div class="icon-grid icon-grid-four">
+          {structures.map(([name, file]) => (
+            <a href={`/assets/brand/structures/${file}`} download><img src={`/assets/brand/structures/${file}`} alt="" /><span>{name}</span></a>
+          ))}
+        </div>
+      </div>
+
+      <div class="asset-family">
+        <div class="asset-family-copy"><p class="guide-label">Plus Elements</p><h3>Use one configurable element or show the family together.</h3><a href="/assets/brand/plus-elements/plus-elements.svg" download>Download combined SVG ↓</a></div>
+        <div class="icon-grid icon-grid-two">
+          <a href="/assets/brand/plus-elements/single-plus-element.svg" download><img src="/assets/brand/plus-elements/single-plus-element.svg" alt="" /><span>Single Plus Element</span></a>
+          <a href="/assets/brand/plus-elements/plus-elements.svg" download><img src="/assets/brand/plus-elements/plus-elements.svg" alt="" /><span>Plus Elements Together</span></a>
+        </div>
+      </div>
+
+      <div class="download-strip">
+        <div><p class="guide-label">Patterns</p><h3>Background building blocks</h3></div>
+        <a href="/assets/brand/patterns/hex-grid.svg" download>Hex grid ↓</a>
+        <a href="/assets/brand/patterns/dense-grid.svg" download>Dense grid ↓</a>
+        <a href="/assets/brand/logo/play-plus.svg" download>Play+ logo ↓</a>
+      </div>
+    </section>
+
+    <footer class="guide-footer">
+      <img src="/assets/brand/logo/play-plus.svg" alt="Play+" />
+      <p>Working brand guidelines · September 2026</p>
+      <a href="#main">Back to top ↑</a>
+    </footer>
+  </main>
+</BaseLayout>

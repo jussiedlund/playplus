@@ -1,0 +1,71 @@
+:root {
+  /* Brand foundations */
+  --color-ink: #0e1032;
+  --color-paper: #ededed;
+  --color-play: #ff275d;
+  --color-colossus: #1b142f;
+  --color-blue: #31528b;
+  --color-blue-accent: #b389d2;
+  --color-yellow: #fcc53b;
+  --color-green: #2c9238;
+  --color-pale-yellow: #fff496;
+  --color-gold: #fcc53b;
+  --color-field-green: #5ea366;
+  --color-deep-green: #136f4b;
+  --color-lavender: #8e70a4;
+  --color-deep-blue: #13335b;
+  --color-blush: #e3b2b5;
+  --color-navy: #001b41;
+  --color-berry: #af193f;
+
+  /* Semantic roles */
+  --color-text: var(--color-ink);
+  --color-background: var(--color-paper);
+  --color-action: var(--color-ink);
+  --color-focus: var(--color-yellow);
+  --color-on-dark: #fff;
+
+  --font-display: 'Mr Banks', Georgia, serif;
+  --font-body: 'Montserrat', Arial, sans-serif;
+  --font-label: 'Bebas Neue', 'Arial Narrow', sans-serif;
+
+  --space-1: 5px;
+  --space-2: 10px;
+  --space-3: 20px;
+  --space-4: 24px;
+  --space-5: 40px;
+  --space-6: 52px;
+  --space-7: 75px;
+  --space-8: 100px;
+
+  --content-narrow: 766px;
+  --content-medium: 900px;
+  --content-wide: 1028px;
+  --page-gutter: 40px;
+  --page-gutter-mobile: 20px;
+
+  --motion-fast: 160ms;
+  --motion-base: 220ms;
+  --motion-reveal: 600ms;
+  --motion-slow: 900ms;
+  --motion-book-return: 500ms;
+  --ease-out: cubic-bezier(.22, .61, .36, 1);
+  --ease-spring: cubic-bezier(.2, .8, .2, 1.08);
+  --reveal-distance: 16px;
+  --floating-nav-trigger: 120px;
+
+  /* Compatibility aliases: remove only after the whole site uses semantic names. */
+  --ink: var(--color-ink);
+  --paper: var(--color-paper);
+  --play: var(--color-play);
+  --night: var(--color-ink);
+  --colossus: var(--color-colossus);
+  --blue: var(--color-blue);
+  --blue-accent: var(--color-blue-accent);
+  --yellow: var(--color-yellow);
+  --green: var(--color-green);
+}
+
+@media (max-width: 767px) {
+  :root { --page-gutter: var(--page-gutter-mobile); }
+}

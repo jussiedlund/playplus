@@ -1,33 +1,16 @@
 @config "../../tailwind.config.mjs";
+@import './tokens.css';
+@import './components.css';
 @import "tailwindcss";
 @import "@fontsource/montserrat/400.css";
 @import "@fontsource/montserrat/600.css";
 @import "@fontsource/montserrat/700.css";
 @import "@fontsource/bebas-neue/400.css";
 
-:root {
-  --ink: #0e1032;
-  --paper: #ededed;
-  --play: #ff275d;
-  --night: #1d172d;
-  --colossus: #1b142f;
-  --blue: #31528b;
-  --blue-accent: #b389d2;
-  --yellow: #fcc53b;
-  --green: #2c9238;
-  --motion-fast: 160ms;
-  --motion-base: 220ms;
-  --motion-reveal: 600ms;
-  --motion-slow: 900ms;
-  --motion-book-return: 500ms;
-  --ease-out: cubic-bezier(.22, .61, .36, 1);
-  --ease-spring: cubic-bezier(.2, .8, .2, 1.08);
-  --reveal-distance: 16px;
-  --floating-nav-trigger: 120px;
-}
-
 @font-face { font-family: 'Mr Banks'; src: url('/fonts/MrBanks-Regular.otf') format('opentype'); font-weight: 400; font-display: swap; }
-@font-face { font-family: 'Mr Banks'; src: url('/fonts/MrBanks-Medium.otf') format('opentype'); font-weight: 600; font-display: swap; }
+@font-face { font-family: 'Mr Banks'; src: url('/fonts/MrBanks-Medium.otf') format('opentype'); font-weight: 500; font-display: swap; }
+@font-face { font-family: 'Mr Banks'; src: url('/fonts/MrBanks-Bold.otf') format('opentype'); font-weight: 700; font-display: swap; }
+@font-face { font-family: 'Mr Banks'; src: url('/fonts/MrBanks-ExtraBold.otf') format('opentype'); font-weight: 800; font-display: swap; }
 @font-face { font-family: 'Mr Banks'; src: url('/fonts/MrBanks-Black.otf') format('opentype'); font-weight: 900; font-display: swap; }
 
 * { box-sizing: border-box; }
@@ -42,12 +25,12 @@ a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-vis
 
 .site-header { position: relative; isolation: isolate; height: 122px; padding: 0 40px; display: flex; align-items: center; justify-content: space-between; background-color: var(--play); color: white; }
 .brand, .header-actions { position: relative; z-index: 30; }
-.brand img { width: 115px; height: auto; }
+.brand img { width: 115px; height: auto; filter: invert(1); }
 .header-actions { display: flex; align-items: center; gap: 30px; }
 .site-header nav { display: flex; align-items: center; gap: 30px; font: 400 26px/1 'Bebas Neue', sans-serif; letter-spacing: .02em; }
 .site-header nav > a { text-decoration: none; }
 .site-header nav > a:hover { text-decoration: underline; }
-.nav-cta, .button { display: inline-flex; min-height: 55px; align-items: center; justify-content: center; border: 0; border-radius: 0; padding: 13px 24px; background: var(--ink); color: white; font: 400 24px/1 'Bebas Neue', sans-serif; letter-spacing: .02em; text-decoration: none; cursor: pointer; }
+.nav-cta { display: inline-flex; min-height: 55px; align-items: center; justify-content: center; border: 0; border-radius: 0; padding: 13px 24px; background: var(--ink); color: white; font: 400 24px/1 'Bebas Neue', sans-serif; letter-spacing: .02em; text-decoration: none; cursor: pointer; }
 .nav-cta { background: white; color: var(--ink); }
 .menu-toggle { display: none; width: 52px; height: 52px; border: 0; padding: 13px 11px; background: var(--ink); cursor: pointer; }
 .menu-toggle span { display: block; width: 100%; height: 3px; margin: 5px 0; background: white; transition: transform .2s ease, opacity .2s ease; }
@@ -58,13 +41,11 @@ a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-vis
 .floating-nav { position: fixed; z-index: 110; top: 18px; left: 50%; display: none; width: min(760px, calc(100vw - 40px)); min-height: 64px; align-items: center; gap: 22px; padding: 10px 12px 10px 20px; background: var(--ink); color: white; box-shadow: 0 14px 36px rgba(14,16,50,.22); transform: translateX(-50%); }
 .floating-nav[data-visible] { display: flex; }
 .floating-brand { flex: 0 0 auto; }
-.floating-brand img { width: 86px; height: auto; }
+.floating-brand img { width: 86px; height: auto; filter: invert(1); }
 .floating-section { min-width: 0; margin-right: auto; overflow: hidden; font: 400 22px/1 'Bebas Neue', sans-serif; letter-spacing: .03em; text-overflow: ellipsis; text-transform: uppercase; white-space: nowrap; }
 .floating-actions { display: flex; align-items: center; gap: 10px; }
 .floating-nav .nav-cta { min-height: 44px; padding: 10px 18px; font-size: 20px; }
 .floating-nav nav { display: none; }
-.button-light { background: white; color: var(--ink); }
-.button-outline { min-width: 245px; border: 2px solid var(--blue-accent); background: transparent; }
 
 .hero { position: relative; isolation: isolate; height: 1140px; perspective: 1200px; background-color: var(--play); }
 .hero-copy { position: relative; z-index: 2; width: 757px; margin-left: max(40px, calc((100vw - 1532px) / 2)); padding-top: 203px; }
@@ -93,8 +74,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-vis
 .section-light { position: relative; isolation: isolate; background-color: var(--paper); }
 
 :is(.site-header, .hero, .section-light, .newsletter, .section-dark, .colossus, .site-footer)::before { position: absolute; z-index: 0; inset: 0; pointer-events: none; content: ''; background-repeat: repeat; }
-:is(.site-header, .hero, .section-light, .newsletter)::before { opacity: .25; background-image: url('/assets/textures/hex-grid.png'); background-size: 34.5px 60px; }
-:is(.section-dark, .colossus, .site-footer)::before { opacity: .25; background-image: url('/assets/textures/hex-pattern-black.png'); background-size: 35px 59px; }
+:is(.site-header, .hero, .section-light, .newsletter)::before { opacity: .25; background-image: url('/assets/brand/patterns/hex-grid.svg'); background-size: 34.5px 60px; }
+:is(.section-dark, .colossus, .site-footer)::before { opacity: .18; background-image: url('/assets/brand/patterns/dense-grid.svg'); background-size: 35px 59px; filter: invert(1); }
 .hero-copy, .manifesto-inner, .endorsements > *, .framework-inner, .authors-inner, .newsletter-inner, .move-inner, .colossus-inner, .site-footer > * { position: relative; z-index: 1; }
 [data-motion='enabled'] [data-reveal], [data-motion='enabled'] [data-hero-reveal] { opacity: 0; transform: translate3d(0, var(--reveal-distance), 0); }
 [data-motion='enabled'] [data-reveal][data-revealed], [data-motion='enabled'] [data-hero-reveal][data-hero-revealed] { opacity: 1; transform: translate3d(0, 0, 0); }
@@ -108,7 +89,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-vis
 .manifesto h2 span { display: block; font-size: 72px; font-weight: 600; line-height: .94; }
 .manifesto h2 strong { display: block; margin-top: 14px; color: #000; font-size: 144px; font-weight: 900; line-height: .78; text-transform: uppercase; }
 
-.label-heading { margin: 0; text-align: center; font: 400 48px/1 'Bebas Neue', sans-serif; letter-spacing: .015em; }
 .endorsements { min-height: 680px; overflow: hidden; padding: 28px 0 65px; }
 .carousel-shell { position: relative; width: min(1032px, 76vw); margin: 54px auto 0; }
 .carousel-viewport { overflow: hidden; }
@@ -127,9 +107,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-vis
 .section-dark { position: relative; isolation: isolate; background-color: var(--night); color: white; }
 .framework { min-height: 1217px; padding: 112px 24px 100px; text-align: center; }
 .framework-inner { width: 1030px; max-width: 100%; margin: auto; }
-.stacked-title { margin: 0; text-align: center; font: 600 72px/.81 'Mr Banks', Georgia, serif; }
-.stacked-title span, .stacked-title strong { display: block; }
-.stacked-title strong { margin-top: 5px; font-size: 124px; font-weight: 900; line-height: .8; text-transform: uppercase; }
 .model-title strong { color: #4c80d2; }
 .model-parts { display: grid; width: 732px; max-width: 100%; grid-template-columns: repeat(3, 200px); justify-content: space-between; margin: 118px auto 0; }
 .model-part { display: flex; height: 250px; flex-direction: column; align-items: center; justify-content: flex-end; gap: 20px; }
@@ -231,7 +208,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-vis
   .manifesto h2 span { font-size: 46px; }
   .manifesto h2 strong { font-size: 80px; }
   .endorsements { padding: 55px 0; }
-  .label-heading { padding: 0 20px; font-size: 34px; }
   .carousel-shell { width: 100vw; margin-top: 38px; }
   .endorsement-track { gap: 16px; }
   .endorsement-card { flex-basis: min(78vw, 590px); height: 780px; grid-template-columns: 1fr; grid-template-rows: 420px 360px; }
@@ -240,8 +216,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-vis
   .endorsement-card > div > p { font-size: 20px; }
   .endorsement-card footer { margin-top: 24px; }
   .framework { padding: 75px 20px; }
-  .stacked-title { font-size: 48px; }
-  .stacked-title strong { font-size: 82px; }
   .model-parts { width: 94%; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; margin-top: 70px; }
   .model-part { height: 180px; gap: 16px; }
   .model-part img { width: min(92px, 82%); max-height: 135px; }
