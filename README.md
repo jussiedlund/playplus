@@ -1,6 +1,6 @@
 # Play+ website
 
-Double-click **Start Play+ Site.command** in Finder for the quickest local preview. It installs dependencies when needed, starts Astro, and opens the site in your browser.
+Double-click **Start Play+ Site.command** in Finder for the quickest local preview. It installs dependencies when needed, starts Astro, prints the local website URL in Terminal, and opens the site in your browser. Keep the Terminal window open while using the site; press Control-C there to stop it.
 
 The active source-of-truth and decision log are in [`PROJECT-BRIEF.md`](PROJECT-BRIEF.md). The homepage currently follows Figma frame `149:539`; animation is intentionally deferred until the static responsive page is approved.
 
@@ -14,6 +14,8 @@ npm run dev
 Before production deployment, confirm body-font licensing, retailer URLs and endorsement copy, add the downloadable resources, and connect the newsletter and workshop forms.
 
 See `CONTENT.md` for the copy and content map.
+
+For Mark and Olof's editorial handover, see the [implementation brief](handover/IMPLEMENTATION-BRIEF.md) and [agent skill setup](handover/SETUP.md). The skill package is prepared; account setup and the preview/publishing workflow remain to be implemented.
 
 ## Password protection on Vercel
 

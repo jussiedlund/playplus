@@ -74,8 +74,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-vis
 .section-light { position: relative; isolation: isolate; background-color: var(--paper); }
 
 :is(.site-header, .hero, .section-light, .newsletter, .section-dark, .colossus, .site-footer)::before { position: absolute; z-index: 0; inset: 0; pointer-events: none; content: ''; background-repeat: repeat; }
-:is(.site-header, .hero, .section-light, .newsletter)::before { opacity: .25; background-image: url('/assets/brand/patterns/hex-grid.svg'); background-size: 34.5px 60px; }
-:is(.section-dark, .colossus, .site-footer)::before { opacity: .18; background-image: url('/assets/brand/patterns/dense-grid.svg'); background-size: 35px 59px; filter: invert(1); }
+:is(.site-header, .hero, .section-light, .newsletter)::before { opacity: .125; background-image: url('/assets/brand/patterns/hex-grid.svg'); background-size: 34.5px 60px; }
+:is(.section-dark, .colossus, .site-footer)::before { opacity: .072; background-image: url('/assets/brand/patterns/dense-grid.svg'); background-size: 35px 59px; filter: invert(1); }
 .hero-copy, .manifesto-inner, .endorsements > *, .framework-inner, .authors-inner, .newsletter-inner, .move-inner, .colossus-inner, .site-footer > * { position: relative; z-index: 1; }
 [data-motion='enabled'] [data-reveal], [data-motion='enabled'] [data-hero-reveal] { opacity: 0; transform: translate3d(0, var(--reveal-distance), 0); }
 [data-motion='enabled'] [data-reveal][data-revealed], [data-motion='enabled'] [data-hero-reveal][data-hero-revealed] { opacity: 1; transform: translate3d(0, 0, 0); }
@@ -106,11 +106,12 @@ a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-vis
 
 .section-dark { position: relative; isolation: isolate; background-color: var(--night); color: white; }
 .framework { min-height: 1217px; padding: 112px 24px 100px; text-align: center; }
+.framework::before { opacity: .054; }
 .framework-inner { width: 1030px; max-width: 100%; margin: auto; }
 .model-title strong { color: #4c80d2; }
 .model-parts { display: grid; width: 732px; max-width: 100%; grid-template-columns: repeat(3, 200px); justify-content: space-between; margin: 118px auto 0; }
 .model-part { display: flex; height: 250px; flex-direction: column; align-items: center; justify-content: flex-end; gap: 20px; }
-.model-part img { max-height: 169px; width: auto; }
+.model-part img { max-height: 169px; width: auto; filter: invert(1); }
 .model-part:first-child img { width: 204px; max-width: none; max-height: none; }
 .model-part strong { font: 400 25px/1 'Bebas Neue', sans-serif; letter-spacing: .02em; }
 .framework-copy { margin: 98px auto 52px; font-size: 32px; line-height: 1.25; }

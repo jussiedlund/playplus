@@ -26,11 +26,16 @@ if [[ ! -d node_modules ]]; then
   }
 fi
 
-echo "Starting the Play+ site. Press Control-C to stop it."
+echo "Starting the Play+ site. Its local URL will appear below. Press Control-C to stop it."
 export ASTRO_TELEMETRY_DISABLED=1
-npm run dev
+npm run dev 2>&1 | while IFS= read -r line; do
+  print -r -- "$line"
+  if [[ "$line" == *"Local"* && "$line" =~ 'https?://(localhost|127[.]0[.]0[.]1):[0-9]+' ]]; then
+    print -r -- "Play+ website: $MATCH"
+  fi
+done
 
-STATUS=$?
+STATUS=${pipestatus[1]}
 if [[ $STATUS -ne 0 ]]; then
   echo "The site stopped with an error (status $STATUS)."
   read -r "?Press Return to close…"

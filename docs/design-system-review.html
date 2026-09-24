@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Design System Recommendations</title>
+  
+  <style>
+    :root {
+      --bg: #f7f4ef;
+      --ink: #171717;
+      --muted: #65615b;
+      --line: #d8d0c5;
+      --panel: #fffdf8;
+      --accent: #7b3f2f;
+      --accent-soft: #f1ded5;
+      --code: #29241f;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font: 15px/1.55 ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+    }
+    header {
+      padding: 40px clamp(20px, 5vw, 72px) 28px;
+      border-bottom: 1px solid var(--line);
+      background: var(--panel);
+    }
+    main { max-width: 1160px; margin: 0 auto; padding: 32px clamp(18px, 4vw, 48px) 64px; }
+    h1 { margin: 0 0 12px; font-size: clamp(32px, 5vw, 56px); line-height: 0.98; letter-spacing: 0; }
+    h2 { margin: 36px 0 14px; font-size: 22px; }
+    h3 { margin: 0; font-size: 18px; }
+    p { margin: 0 0 12px; color: var(--muted); }
+    code { color: var(--code); background: rgba(0,0,0,0.06); padding: 1px 4px; border-radius: 4px; }
+    .meta { display: flex; flex-wrap: wrap; gap: 10px 18px; color: var(--muted); }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; }
+    .decision-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px; }
+    .panel, .decision {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    .decision { display: flex; flex-direction: column; gap: 14px; }
+    .decision__head { display: flex; justify-content: space-between; gap: 16px; align-items: start; }
+    .status { border-radius: 999px; background: var(--accent-soft); color: var(--accent); padding: 3px 8px; font-size: 12px; white-space: nowrap; }
+    .options { display: grid; gap: 8px; }
+    .compare { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .compare__item {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      background: rgba(255,255,255,0.55);
+    }
+    .compare__item--recommended { border-color: color-mix(in srgb, var(--accent) 45%, var(--line)); background: var(--accent-soft); }
+    .compare__label { margin: 0 0 8px; color: var(--accent); font-weight: 750; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .specimen, .ref { display: grid; gap: 4px; padding: 8px 0; border-top: 1px solid rgba(0,0,0,0.08); }
+    .specimen:first-child, .ref:first-child { border-top: 0; }
+    .specimen span, .ref span { color: var(--muted); font: 12px/1.4 ui-sans-serif, system-ui, sans-serif; }
+    .specimen strong { display: block; font-size: 26px; line-height: 1.05; letter-spacing: 0; }
+    .specimen small { display: block; color: var(--muted); font-size: 13px; line-height: 1.35; }
+    .size-row, .space-row, .shape-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 6px 0; border-top: 1px solid rgba(0,0,0,0.08); }
+    .size-row:first-child, .space-row:first-child, .shape-row:first-child { border-top: 0; }
+    .size-row b { line-height: 1; white-space: nowrap; }
+    .space-row i { display: block; height: 14px; min-width: 1px; background: var(--accent); border-radius: 999px; }
+    .shape-row i { display: block; width: 42px; height: 28px; background: var(--accent); }
+    .ref b { font-size: 15px; }
+    .ref p { margin: 0; color: var(--ink); font-size: 13px; line-height: 1.35; }
+    label { color: var(--ink); }
+    input { margin-right: 8px; }
+    details { border-top: 1px solid var(--line); padding-top: 10px; }
+    summary { cursor: pointer; color: var(--accent); font-weight: 650; }
+    ul { margin: 8px 0 0; padding-left: 20px; }
+    .notes { display: grid; gap: 6px; font-weight: 650; color: var(--muted); }
+    textarea {
+      width: 100%;
+      resize: vertical;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 10px;
+      font: inherit;
+      color: var(--ink);
+      background: #fff;
+    }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+    button {
+      border: 1px solid var(--accent);
+      background: var(--accent);
+      color: #fff;
+      border-radius: 6px;
+      padding: 9px 12px;
+      font: inherit;
+      cursor: pointer;
+    }
+    button.secondary { background: transparent; color: var(--accent); }
+    pre {
+      overflow: auto;
+      background: #211c18;
+      color: #fff8ef;
+      border-radius: 8px;
+      padding: 16px;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    pre code { color: inherit; background: transparent; padding: 0; }
+    @media (max-width: 760px) { .compare { grid-template-columns: 1fr; } }
+    @media print { .actions { display: none; } body { background: #fff; } }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Design System Recommendations</h1>
+    <p>Review these decisions before implementing shared tokens and components.</p>
+    <div class="meta">
+      <span>Target: <code>/Users/jussi/Library/CloudStorage/GoogleDrive-jussi@ivorytower.design/Shared drives/Everything/03 Clients/Play+/play-plus-site/src</code></span>
+      <span>Generated: 2026-09-14 10:51</span>
+      <span>Markup files: 9</span>
+      <span>CSS files: 1</span>
+    </div>
+    <div class="actions">
+      <button type="button" onclick="window.print()">Print / Save PDF</button>
+      <button type="button" class="secondary" onclick="exportDecisions()">Export decisions JSON</button>
+      <button type="button" class="secondary" onclick="resetDecisions()">Reset local decisions</button>
+    </div>
+    <p class="review-note">No submit step is required. Pick options and add notes here; choices save in this browser. Export JSON when you want to hand the decisions to implementation.</p>
+  </header>
+  <main>
+    <section class="panel">
+      <h2>Evidence Snapshot</h2>
+      <h3>Typography</h3>
+      <ul><li><strong>font-family</strong>: <code>&#x27;Montserrat&#x27;, Arial, sans-serif</code> (1), <code>&#x27;Mr Banks&#x27;, Georgia, serif</code> (1)</li>
+<li><strong>font-size</strong>: <code>32px</code> (5), <code>18px</code> (5), <code>20px</code> (4), <code>23px</code> (3), <code>16px</code> (2), <code>24px</code> (2), <code>19px</code> (2), <code>34px</code> (2), <code>48px</code> (2), <code>142px</code> (1)</li>
+<li><strong>font-weight</strong>: <code>900</code> (4), <code>600</code> (2)</li>
+<li><strong>line-height</strong>: <code>1.18</code> (2), <code>1.25</code> (2), <code>1.45</code> (1), <code>.79</code> (1), <code>1.22</code> (1), <code>1.32</code> (1), <code>.94</code> (1), <code>.78</code> (1), <code>.8</code> (1), <code>1.4</code> (1)</li>
+<li><strong>letter-spacing</strong>: <code>.02em</code> (3), <code>.015em</code> (2), <code>.03em</code> (1), <code>-.02em</code> (1)</li></ul>
+      <h3>Spacing and shape</h3>
+      <ul><li><strong>padding</strong>: <code>75px 20px</code> (5), <code>0</code> (3), <code>10px 18px</code> (2), <code>.75rem 1rem</code> (1), <code>0 40px</code> (1), <code>13px 24px</code> (1), <code>13px 11px</code> (1), <code>10px 12px 10px 20px</code> (1), <code>150px 24px 105px</code> (1), <code>28px 0 65px</code> (1)</li>
+<li><strong>padding-top</strong>: <code>203px</code> (1), <code>150px</code> (1)</li>
+<li><strong>margin</strong>: <code>0</code> (13), <code>auto</code> (8), <code>5px 0</code> (1), <code>62px 0 0</code> (1), <code>0 0 8px</code> (1), <code>168px auto 0</code> (1), <code>54px auto 0</code> (1), <code>118px auto 0</code> (1), <code>98px auto 52px</code> (1), <code>24px 0 14px</code> (1)</li>
+<li><strong>margin-bottom</strong>: <code>48px</code> (1), <code>40px</code> (1)</li>
+<li><strong>gap</strong>: <code>20px</code> (7), <code>10px</code> (3), <code>30px</code> (2), <code>22px</code> (2), <code>16px</code> (2), <code>7px 18px</code> (1), <code>8px</code> (1), <code>5px</code> (1), <code>34px</code> (1), <code>65px</code> (1)</li>
+<li><strong>border-radius</strong>: <code>50%</code> (2), <code>0</code> (1)</li></ul>
+      <h3>Current custom properties</h3>
+      <ul><li><strong><code>--book-parallax-max</code></strong>: <code>40px</code> (1), <code>16px</code> (1)</li><li><strong><code>--book-parallax-y</code></strong>: <code>0px</code> (1)</li><li><strong><code>--book-rotation</code></strong>: <code>-10.13deg</code> (1), <code>-7deg</code> (1)</li><li><strong><code>--book-shadow-opacity</code></strong>: <code>.62</code> (1)</li><li><strong><code>--book-tilt-max</code></strong>: <code>2deg</code> (1)</li><li><strong><code>--book-tilt-x</code></strong>: <code>0deg</code> (1)</li><li><strong><code>--book-tilt-y</code></strong>: <code>0deg</code> (1)</li><li><strong><code>--motion-reveal</code></strong>: <code>500ms</code> (1)</li><li><strong><code>--reveal-distance</code></strong>: <code>12px</code> (1)</li></ul>
+    </section>
+
+    <h2>Typography Decisions</h2>
+    <section class="decision-grid">
+      <article class="decision" data-card="typefaces">
+        <div class="decision__head">
+          <h3>Typeface consolidation</h3>
+          <span class="status">Decision needed</span>
+        </div>
+        <p>The goal is to limit production typefaces while preserving brand intent.</p>
+        
+      <div class="compare">
+        <div class="compare__item">
+          <p class="compare__label">Current detected faces</p>
+          <div class="specimen" style="font-family: &#x27;Montserrat&#x27;, Arial, sans-serif"><span>&#x27;Montserrat&#x27;, Arial, sans-serif (1)</span><strong>Featured programmes</strong><small>Singapore's largest nocturnal experience</small></div><div class="specimen" style="font-family: &#x27;Mr Banks&#x27;, Georgia, serif"><span>&#x27;Mr Banks&#x27;, Georgia, serif (1)</span><strong>Featured programmes</strong><small>Singapore's largest nocturnal experience</small></div>
+        </div>
+        <div class="compare__item compare__item--recommended">
+          <p class="compare__label">Possible consolidation</p>
+          
+      <div class="specimen" style="font-family: var(--font-display, 'Bebas Neue', sans-serif)">
+        <span>Display role</span>
+        <strong>Featured programmes</strong>
+        <small>Used for campaign headings and large labels.</small>
+      </div>
+      <div class="specimen" style="font-family: var(--font-body, system-ui, sans-serif)">
+        <span>Body role</span>
+        <strong>Programme detail</strong>
+        <small>Used for navigation, body copy, cards, metadata, and controls.</small>
+      </div>
+    
+        </div>
+      </div>
+    
+        <div class="options"><label><input type="radio" name="typefaces" value="Consolidate to body + display families; document intentional campaign exceptions" checked> Consolidate to body + display families; document intentional campaign exceptions</label><label><input type="radio" name="typefaces" value="Keep all current families but map each to a named role"> Keep all current families but map each to a named role</label><label><input type="radio" name="typefaces" value="Defer until visual review confirms which faces are intentional"> Defer until visual review confirms which faces are intentional</label></div>
+        <details>
+          <summary>Evidence</summary>
+          <ul><li><code>&#x27;Montserrat&#x27;, Arial, sans-serif</code> appears 1 times</li><li><code>&#x27;Mr Banks&#x27;, Georgia, serif</code> appears 1 times</li></ul>
+        </details>
+        <label class="notes">Notes
+          <textarea name="typefaces__notes" rows="3" placeholder="Record the decision, rationale, or exception."></textarea>
+        </label>
+      </article>
+    
+
+      <article class="decision" data-card="font-sizes">
+        <div class="decision__head">
+          <h3>Font size scale</h3>
+          <span class="status">Decision needed</span>
+        </div>
+        <p>Repeated and near-duplicate sizes should become a smaller tokenized scale.</p>
+        
+      <div class="compare">
+        <div class="compare__item">
+          <p class="compare__label">Current top sizes</p>
+          <div class="size-row"><span><code>32px</code> (5)</span><b style="font-size:32px">Aa</b></div><div class="size-row"><span><code>18px</code> (5)</span><b style="font-size:18px">Aa</b></div><div class="size-row"><span><code>20px</code> (4)</span><b style="font-size:20px">Aa</b></div><div class="size-row"><span><code>23px</code> (3)</span><b style="font-size:23px">Aa</b></div><div class="size-row"><span><code>16px</code> (2)</span><b style="font-size:16px">Aa</b></div><div class="size-row"><span><code>24px</code> (2)</span><b style="font-size:24px">Aa</b></div><div class="size-row"><span><code>19px</code> (2)</span><b style="font-size:19px">Aa</b></div><div class="size-row"><span><code>34px</code> (2)</span><b style="font-size:34px">Aa</b></div>
+        </div>
+        <div class="compare__item compare__item--recommended">
+          <p class="compare__label">Possible type scale</p>
+          <div class="size-row"><span><code>--type-1</code></span><b style="font-size:12px">Aa</b></div><div class="size-row"><span><code>--type-2</code></span><b style="font-size:14px">Aa</b></div><div class="size-row"><span><code>--type-3</code></span><b style="font-size:16px">Aa</b></div><div class="size-row"><span><code>--type-4</code></span><b style="font-size:20px">Aa</b></div><div class="size-row"><span><code>--type-5</code></span><b style="font-size:24px">Aa</b></div><div class="size-row"><span><code>--type-6</code></span><b style="font-size:clamp(46px, 8vw, 72px)">Aa</b></div>
+        </div>
+      </div>
+    
+        <div class="options"><label><input type="radio" name="font-sizes" value="Collapse near-duplicate sizes into a named type scale" checked> Collapse near-duplicate sizes into a named type scale</label><label><input type="radio" name="font-sizes" value="Keep current sizes but replace literals with tokens"> Keep current sizes but replace literals with tokens</label><label><input type="radio" name="font-sizes" value="Defer; current hierarchy needs visual review"> Defer; current hierarchy needs visual review</label></div>
+        <details>
+          <summary>Evidence</summary>
+          <ul><li><code>32px</code> appears 5 times</li><li><code>18px</code> appears 5 times</li><li><code>20px</code> appears 4 times</li><li><code>23px</code> appears 3 times</li><li><code>16px</code> appears 2 times</li><li><code>24px</code> appears 2 times</li><li><code>19px</code> appears 2 times</li><li><code>34px</code> appears 2 times</li><li><code>48px</code> appears 2 times</li><li><code>142px</code> appears 1 times</li><li><code>72px</code> appears 1 times</li><li><code>144px</code> appears 1 times</li><li><code>clamp(19px, 1.55vw, 26px)</code> appears 1 times</li><li><code>124px</code> appears 1 times</li><li><code>54px</code> appears 1 times</li><li><code>clamp(48px, 5vw, 65px)</code> appears 1 times</li></ul>
+        </details>
+        <label class="notes">Notes
+          <textarea name="font-sizes__notes" rows="3" placeholder="Record the decision, rationale, or exception."></textarea>
+        </label>
+      </article>
+    
+
+      <article class="decision" data-card="font-weights">
+        <div class="decision__head">
+          <h3>Font weight treatments</h3>
+          <span class="status">Decision needed</span>
+        </div>
+        <p>Weights should map to roles instead of accumulating per component.</p>
+        
+      <div class="compare">
+        <div class="compare__item">
+          <p class="compare__label">Current weights</p>
+          <div class="specimen"><span><code>900</code> (4)</span><strong style="font-weight:900">Programme title</strong></div><div class="specimen"><span><code>600</code> (2)</span><strong style="font-weight:600">Programme title</strong></div>
+        </div>
+        <div class="compare__item compare__item--recommended">
+          <p class="compare__label">Possible role mapping</p>
+          
+      <div class="specimen"><span>Regular</span><strong style="font-weight:400">Body and metadata</strong></div>
+      <div class="specimen"><span>Medium/Semibold</span><strong style="font-weight:600">Controls and labels</strong></div>
+      <div class="specimen"><span>Bold/Display</span><strong style="font-weight:700">Titles and calls to action</strong></div>
+    
+        </div>
+      </div>
+    
+        <div class="options"><label><input type="radio" name="font-weights" value="Reduce weights to regular, medium, bold, and one display weight" checked> Reduce weights to regular, medium, bold, and one display weight</label><label><input type="radio" name="font-weights" value="Keep all weights but assign component roles"> Keep all weights but assign component roles</label><label><input type="radio" name="font-weights" value="Defer until typeface consolidation is decided"> Defer until typeface consolidation is decided</label></div>
+        <details>
+          <summary>Evidence</summary>
+          <ul><li><code>900</code> appears 4 times</li><li><code>600</code> appears 2 times</li></ul>
+        </details>
+        <label class="notes">Notes
+          <textarea name="font-weights__notes" rows="3" placeholder="Record the decision, rationale, or exception."></textarea>
+        </label>
+      </article>
+    </section>
+
+    <h2>Spacing, Shape, and Treatment Decisions</h2>
+    <section class="decision-grid">
+      <article class="decision" data-card="spacing-scale">
+        <div class="decision__head">
+          <h3>Spacing scale</h3>
+          <span class="status">Decision needed</span>
+        </div>
+        <p>Repeated gaps, margins, and padding should be collapsed into shared spacing tokens.</p>
+        
+      <div class="compare">
+        <div class="compare__item">
+          <p class="compare__label">Current repeated spacing</p>
+          <div class="space-row"><span><code>20px</code> (7)</span><i style="width:20px"></i></div><div class="space-row"><span><code>10px</code> (3)</span><i style="width:10px"></i></div><div class="space-row"><span><code>30px</code> (2)</span><i style="width:30px"></i></div><div class="space-row"><span><code>22px</code> (2)</span><i style="width:22px"></i></div><div class="space-row"><span><code>16px</code> (2)</span><i style="width:16px"></i></div><div class="space-row"><span><code>7px 18px</code> (1)</span><i style="width:7px"></i></div><div class="space-row"><span><code>8px</code> (1)</span><i style="width:8px"></i></div><div class="space-row"><span><code>5px</code> (1)</span><i style="width:5px"></i></div><div class="space-row"><span><code>75px 20px</code> (5)</span><i style="width:75px"></i></div><div class="space-row"><span><code>0</code> (3)</span><i style="width:0"></i></div><div class="space-row"><span><code>10px 18px</code> (2)</span><i style="width:10px"></i></div><div class="space-row"><span><code>.75rem 1rem</code> (1)</span><i style="width:.75rem"></i></div>
+        </div>
+        <div class="compare__item compare__item--recommended">
+          <p class="compare__label">Possible spacing roles</p>
+          <div class="space-row"><span><code>--space-1</code> 6px</span><i style="width:6px"></i></div><div class="space-row"><span><code>--space-2</code> 8px</span><i style="width:8px"></i></div><div class="space-row"><span><code>--space-3</code> 10px</span><i style="width:10px"></i></div><div class="space-row"><span><code>--space-4</code> 12px</span><i style="width:12px"></i></div><div class="space-row"><span><code>--space-5</code> 20px</span><i style="width:20px"></i></div>
+        </div>
+      </div>
+    
+        <div class="options"><label><input type="radio" name="spacing-scale" value="Adopt a compact scale and remap repeated gaps/padding to tokens" checked> Adopt a compact scale and remap repeated gaps/padding to tokens</label><label><input type="radio" name="spacing-scale" value="Keep current values but name the most common ones"> Keep current values but name the most common ones</label><label><input type="radio" name="spacing-scale" value="Defer until responsive layouts are reviewed"> Defer until responsive layouts are reviewed</label></div>
+        <details>
+          <summary>Evidence</summary>
+          <ul><li><code>20px</code> appears 7 times</li><li><code>10px</code> appears 3 times</li><li><code>30px</code> appears 2 times</li><li><code>22px</code> appears 2 times</li><li><code>16px</code> appears 2 times</li><li><code>7px 18px</code> appears 1 times</li><li><code>8px</code> appears 1 times</li><li><code>5px</code> appears 1 times</li><li><code>34px</code> appears 1 times</li><li><code>65px</code> appears 1 times</li><li><code>75px 20px</code> appears 5 times</li><li><code>0</code> appears 3 times</li><li><code>10px 18px</code> appears 2 times</li><li><code>.75rem 1rem</code> appears 1 times</li><li><code>0 40px</code> appears 1 times</li><li><code>13px 24px</code> appears 1 times</li><li><code>13px 11px</code> appears 1 times</li><li><code>10px 12px 10px 20px</code> appears 1 times</li><li><code>150px 24px 105px</code> appears 1 times</li><li><code>28px 0 65px</code> appears 1 times</li><li><code>34px 42px</code> appears 1 times</li><li><code>112px 24px 100px</code> appears 1 times</li><li><code>96px 24px 100px</code> appears 1 times</li><li><code>91px 24px</code> appears 1 times</li><li><code>101px 24px 122px</code> appears 1 times</li><li><code>39px 42px 35px</code> appears 1 times</li></ul>
+        </details>
+        <label class="notes">Notes
+          <textarea name="spacing-scale__notes" rows="3" placeholder="Record the decision, rationale, or exception."></textarea>
+        </label>
+      </article>
+    
+
+      <article class="decision" data-card="radius-scale">
+        <div class="decision__head">
+          <h3>Radius and shape scale</h3>
+          <span class="status">Decision needed</span>
+        </div>
+        <p>Cards, controls, tags, and circular icons should use intentional shape tokens.</p>
+        
+      <div class="compare">
+        <div class="compare__item">
+          <p class="compare__label">Current shapes</p>
+          <div class="shape-row"><span><code>50%</code> (2)</span><i style="border-radius:50%"></i></div><div class="shape-row"><span><code>0</code> (1)</span><i style="border-radius:0"></i></div>
+        </div>
+        <div class="compare__item compare__item--recommended">
+          <p class="compare__label">Possible shape roles</p>
+          
+      <div class="shape-row"><span><code>--radius-control</code> 4px</span><i style="border-radius:4px"></i></div>
+      <div class="shape-row"><span><code>--radius-card</code> 8px</span><i style="border-radius:8px"></i></div>
+      <div class="shape-row"><span><code>--radius-pill</code> 999px</span><i style="border-radius:999px"></i></div>
+      <div class="shape-row"><span><code>--shape-circle</code> 50%</span><i style="border-radius:50%"></i></div>
+    
+        </div>
+      </div>
+    
+        <div class="options"><label><input type="radio" name="radius-scale" value="Use a small radius scale plus explicit circular token" checked> Use a small radius scale plus explicit circular token</label><label><input type="radio" name="radius-scale" value="Keep current radii but map them to component roles"> Keep current radii but map them to component roles</label><label><input type="radio" name="radius-scale" value="Defer; inspect cards and controls visually first"> Defer; inspect cards and controls visually first</label></div>
+        <details>
+          <summary>Evidence</summary>
+          <ul><li><code>50%</code> appears 2 times</li><li><code>0</code> appears 1 times</li></ul>
+        </details>
+        <label class="notes">Notes
+          <textarea name="radius-scale__notes" rows="3" placeholder="Record the decision, rationale, or exception."></textarea>
+        </label>
+      </article>
+    </section>
+
+    <h2>Componentization Decisions</h2>
+    <section class="decision-grid">
+      <article class="decision" data-card="component-priority">
+        <div class="decision__head">
+          <h3>First component extraction</h3>
+          <span class="status">Decision needed</span>
+        </div>
+        <p>Start with the repeated UI that appears across pages and carries visible consistency risk.</p>
+        
+      <div class="compare">
+        <div class="compare__item">
+          <p class="compare__label">Current referenced examples</p>
+          <div class="ref"><b>.section-light</b><span>components/EndorsementCarousel.astro · section</span><p>what others have to say about the book {endorsements.map((endorsement, index) =&gt; ( “{endorsement.quote}” — {endorsement.name} {endorsement.role} ))} {endorsements.map((_, index) =&gt;</p></div><div class="ref"><b>.section-light</b><span>pages/index.astro · section</span><p>Play is not the opposite of work. It is the foundation of the work that machines cannot do. In an era where AI is automating the predictable, the organisations that break through w</p></div><div class="ref"><b>.stub-page</b><span>pages/framework.astro · main</span><p>Coming next The Play+ framework The full interactive framework explorer is outside this homepage pass. Return to the homepage teaser</p></div><div class="ref"><b>.stub-page</b><span>pages/notes.astro · main</span><p>Coming next Notes on work and play The notes archive is outside this homepage pass. Return home</p></div>
+        </div>
+        <div class="compare__item compare__item--recommended">
+          <p class="compare__label">Possible components</p>
+          
+      <div class="ref"><b>ProgramCard</b><span>card + image + category + metadata</span><p>Use when the full programme teaser repeats across pages.</p></div>
+      <div class="ref"><b>MetaRow</b><span>metadata cluster</span><p>Use for venue, date, timing, and status lines.</p></div>
+      <div class="ref"><b>CategoryTag / Chip</b><span>label and filter controls</span><p>Use for programme categories and selected filters.</p></div>
+    
+        </div>
+      </div>
+    
+        <div class="options"><label><input type="radio" name="component-priority" value="Extract cards, metadata rows, category tags, chips, and shared links first" checked> Extract cards, metadata rows, category tags, chips, and shared links first</label><label><input type="radio" name="component-priority" value="Extract shell/nav/footer first, then content components"> Extract shell/nav/footer first, then content components</label><label><input type="radio" name="component-priority" value="Defer implementation and review screenshots/page inventory"> Defer implementation and review screenshots/page inventory</label></div>
+        <details>
+          <summary>Evidence</summary>
+          <ul><li><code>button</code> appears 8 times</li><li><code>button-ink</code> appears 6 times</li><li><code>section-light</code> appears 4 times</li><li><code>stacked-title</code> appears 4 times</li><li><code>stub-page</code> appears 4 times</li><li><code>eyebrow</code> appears 4 times</li><li><code>model-part</code> appears 3 times</li><li><code>label-heading</code> appears 2 times</li><li><code>nav-cta</code> appears 2 times</li><li><code>endorsements</code> appears 1 times</li><li><code>carousel-shell</code> appears 1 times</li><li><code>carousel-viewport</code> appears 1 times</li><li><code>endorsement-track</code> appears 1 times</li><li><code>endorsement-card</code> appears 1 times</li><li><code>carousel-dots</code> appears 1 times</li><li><code>framework</code> appears 1 times</li><li><code>section-dark</code> appears 1 times</li><li><code>framework-inner</code> appears 1 times</li><li><code>button button-ink</code> appears 5 times</li><li><code>stub-page</code> appears 4 times</li><li><code>eyebrow</code> appears 4 times</li><li><code>model-part</code> appears 3 times</li><li><code>stacked-title</code> appears 3 times</li><li><code>label-heading</code> appears 2 times</li><li><code>nav-cta</code> appears 2 times</li></ul>
+        </details>
+        <label class="notes">Notes
+          <textarea name="component-priority__notes" rows="3" placeholder="Record the decision, rationale, or exception."></textarea>
+        </label>
+      </article>
+    
+
+      <article class="decision" data-card="dynamic-vs-static">
+        <div class="decision__head">
+          <h3>Static markup or render helpers</h3>
+          <span class="status">Decision needed</span>
+        </div>
+        <p>Repeated content can stay static or move to data-driven rendering depending on editability and count.</p>
+        
+      <div class="compare">
+        <div class="compare__item">
+          <p class="compare__label">Current referenced examples</p>
+          <div class="ref"><b>.section-light</b><span>components/EndorsementCarousel.astro · section</span><p>what others have to say about the book {endorsements.map((endorsement, index) =&gt; ( “{endorsement.quote}” — {endorsement.name} {endorsement.role} ))} {endorsements.map((_, index) =&gt;</p></div><div class="ref"><b>.section-light</b><span>pages/index.astro · section</span><p>Play is not the opposite of work. It is the foundation of the work that machines cannot do. In an era where AI is automating the predictable, the organisations that break through w</p></div><div class="ref"><b>.stub-page</b><span>pages/framework.astro · main</span><p>Coming next The Play+ framework The full interactive framework explorer is outside this homepage pass. Return to the homepage teaser</p></div><div class="ref"><b>.stub-page</b><span>pages/notes.astro · main</span><p>Coming next Notes on work and play The notes archive is outside this homepage pass. Return home</p></div>
+        </div>
+        <div class="compare__item compare__item--recommended">
+          <p class="compare__label">Possible components</p>
+          
+      <div class="ref"><b>ProgramCard</b><span>card + image + category + metadata</span><p>Use when the full programme teaser repeats across pages.</p></div>
+      <div class="ref"><b>MetaRow</b><span>metadata cluster</span><p>Use for venue, date, timing, and status lines.</p></div>
+      <div class="ref"><b>CategoryTag / Chip</b><span>label and filter controls</span><p>Use for programme categories and selected filters.</p></div>
+    
+        </div>
+      </div>
+    
+        <div class="options"><label><input type="radio" name="dynamic-vs-static" value="Keep static HTML but normalize shared classes/components" checked> Keep static HTML but normalize shared classes/components</label><label><input type="radio" name="dynamic-vs-static" value="Move repeated cards/lists to data-driven render helpers"> Move repeated cards/lists to data-driven render helpers</label><label><input type="radio" name="dynamic-vs-static" value="Use framework components because the project already has a component layer"> Use framework components because the project already has a component layer</label></div>
+        <details>
+          <summary>Evidence</summary>
+          <ul><li><code>hero</code> appears 13 times in selectors</li><li><code>move-card</code> appears 13 times in selectors</li><li><code>endorsement-card</code> appears 11 times in selectors</li><li><code>newsletter</code> appears 10 times in selectors</li><li><code>site-header</code> appears 9 times in selectors</li><li><code>book-motion</code> appears 9 times in selectors</li><li><code>manifesto</code> appears 9 times in selectors</li><li><code>stacked-title</code> appears 9 times in selectors</li><li><code>author-grid</code> appears 9 times in selectors</li><li><code>model-part</code> appears 8 times in selectors</li><li><code>hero-copy</code> appears 7 times in selectors</li><li><code>menu-toggle</code> appears 6 times in selectors</li><li><code>floating-nav</code> appears 6 times in selectors</li><li><code>colossus</code> appears 6 times in selectors</li><li><code>nav-cta</code> appears 5 times in selectors</li><li><code>retailers</code> appears 5 times in selectors</li><li><code>site-footer</code> appears 5 times in selectors</li><li><code>authors</code> appears 5 times in selectors</li></ul>
+        </details>
+        <label class="notes">Notes
+          <textarea name="dynamic-vs-static__notes" rows="3" placeholder="Record the decision, rationale, or exception."></textarea>
+        </label>
+      </article>
+    </section>
+
+    <section class="panel">
+      <h2>Starter Code Proposal</h2>
+      <p>This is not final implementation code. It is a concrete first draft to make consolidation choices visible before editing the app.</p>
+      <pre><code>:root {
+  --font-display-role: var(--font-display);
+  --font-body-role: var(--font-body);
+  --type-1: 32px;
+  --type-2: 18px;
+  --type-3: 20px;
+  --type-4: 23px;
+  --type-5: 16px;
+  --type-6: 24px;
+  --space-1: 20px;
+  --space-2: 10px;
+  --space-3: 30px;
+  --space-4: 22px;
+  --space-5: 16px;
+  --radius-1: 50%;
+  --radius-2: 0;
+}
+
+.section-heading {
+  font-family: var(--font-display-role);
+  font-size: var(--type-6);
+  line-height: 1;
+}
+
+.meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+}
+
+.tag,
+.chip {
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--radius-4);
+}
+
+/* Candidate component: .button */</code></pre>
+    </section>
+
+    <section class="panel">
+      <h2>Recommended Protected Implementation Order</h2>
+      <ol>
+        <li>Commit this recommendation artifact and any captured decisions.</li>
+        <li>Add or normalize design tokens without changing markup.</li>
+        <li>Extract primitives: headings, buttons, text links, tags, chips, metadata rows.</li>
+        <li>Extract domain components: cards, list rows, map markers, footer/link groups.</li>
+        <li>Convert one representative page, verify, then convert the remaining pages.</li>
+        <li>Remove dead selectors, rerun the audit, build, and capture before/after notes.</li>
+      </ol>
+    </section>
+  </main>
+  <script>
+    const key = "design-system-decisions:" + location.pathname;
+    function collect() {
+      const data = {};
+      document.querySelectorAll("input[type=radio]:checked, textarea").forEach((field) => {
+        data[field.name] = field.value;
+      });
+      return data;
+    }
+    function save() {
+      localStorage.setItem(key, JSON.stringify(collect(), null, 2));
+    }
+    function load() {
+      const raw = localStorage.getItem(key);
+      if (!raw) return;
+      const data = JSON.parse(raw);
+      Object.entries(data).forEach(([name, value]) => {
+        document.querySelectorAll("input[type=radio]").forEach((radio) => {
+          if (radio.name === name && radio.value === value) radio.checked = true;
+        });
+        const textarea = document.querySelector(`textarea[name="${CSS.escape(name)}"]`);
+        if (textarea) textarea.value = value;
+      });
+    }
+    function exportDecisions() {
+      const blob = new Blob([JSON.stringify(collect(), null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "design-system-decisions.json";
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+    function resetDecisions() {
+      localStorage.removeItem(key);
+      location.reload();
+    }
+    document.addEventListener("change", save);
+    document.addEventListener("input", save);
+    load();
+  </script>
+</body>
+</html>
